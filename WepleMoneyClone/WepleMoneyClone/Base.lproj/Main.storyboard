@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--주간-->
+        <!--12월-->
         <scene sceneID="YXt-Mb-eqB">
             <objects>
                 <viewController id="3iA-vG-TmH" customClass="WeekViewController" customModule="WepleMoneyClone" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,13 +19,13 @@
                         <viewLayoutGuide key="safeArea" id="aNC-5F-YuL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="주간" id="puV-IR-AIa"/>
+                    <navigationItem key="navigationItem" title="12월" id="uIO-2E-Ajo"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2yR-u8-Idi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1613" y="289"/>
+            <point key="canvasLocation" x="2521.739130434783" y="288.61607142857139"/>
         </scene>
-        <!--월간-->
+        <!--12월-->
         <scene sceneID="fmk-ZB-jID">
             <objects>
                 <viewController id="pe6-Nc-z8n" customClass="MonthViewController" customModule="WepleMoneyClone" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,11 +35,11 @@
                         <viewLayoutGuide key="safeArea" id="ceM-qu-FGQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="월간" id="KvX-1m-hB5"/>
+                    <navigationItem key="navigationItem" title="12월" id="E4c-5x-bkO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7B-hs-KoN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1614" y="-394"/>
+            <point key="canvasLocation" x="2523.1884057971015" y="-394.41964285714283"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="BfO-lJ-snl">
@@ -51,13 +51,51 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="pe6-Nc-z8n" kind="relationship" relationship="viewControllers" id="ZSl-pI-hFD"/>
-                        <segue destination="3iA-vG-TmH" kind="relationship" relationship="viewControllers" id="WbX-3G-ir5"/>
+                        <segue destination="Jfw-Se-Khw" kind="relationship" relationship="viewControllers" id="ZSl-pI-hFD"/>
+                        <segue destination="Txw-xD-i4v" kind="relationship" relationship="viewControllers" id="WbX-3G-ir5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lb7-Sd-mPY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="625" y="-74"/>
+        </scene>
+        <!--월간-->
+        <scene sceneID="eu2-vm-f3A">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jfw-Se-Khw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="월간" id="KvX-1m-hB5"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HCl-13-Hx9">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pe6-Nc-z8n" kind="relationship" relationship="rootViewController" id="L8v-C8-92M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x34-Xk-qhP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1613.0434782608697" y="-394.41964285714283"/>
+        </scene>
+        <!--주간-->
+        <scene sceneID="AeD-7O-8ZW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Txw-xD-i4v" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="주간" id="puV-IR-AIa"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rUd-Rb-WA5">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3iA-vG-TmH" kind="relationship" relationship="rootViewController" id="hpk-iW-Lgk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V6B-SX-Khp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1611.5942028985507" y="288.61607142857139"/>
         </scene>
     </scenes>
     <resources>
