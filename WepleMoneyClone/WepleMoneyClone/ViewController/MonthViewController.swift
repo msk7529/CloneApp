@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 final class MonthViewController: UIViewController {
 
@@ -110,11 +111,28 @@ final class MonthViewController: UIViewController {
         return mergeImage
     }()
     
+    lazy var dayCollecionView: DayCollectionView = {
+        let dayCollecionView: DayCollectionView = DayCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        // collectionViewLayout에 UICollectionViewLayout() 넣으면 cellForItemAt, UICollectionViewDelegateFlowLayout 동작 안함...
+        dayCollecionView.backgroundColor = .clear
+        dayCollecionView.translatesAutoresizingMaskIntoConstraints = false
+        dayCollecionView.isScrollEnabled = false
+        return dayCollecionView
+    }()
+    
+    lazy var seperlatorLine: UIView = {
+        let seperlatorLine: UIView = UIView(frame: .zero)
+        seperlatorLine.translatesAutoresizingMaskIntoConstraints = false
+        seperlatorLine.backgroundColor = .lightGray
+        return seperlatorLine
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         makeUI()
+        constructCollectionViews()
     }
     
     private func makeUI() {
@@ -129,6 +147,8 @@ final class MonthViewController: UIViewController {
         self.view.addSubview(card)
         self.view.addSubview(cardMoney)
         self.view.addSubview(mergeImage)
+        self.view.addSubview(dayCollecionView)
+        self.view.addSubview(seperlatorLine)
         
         income.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         income.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
@@ -150,7 +170,7 @@ final class MonthViewController: UIViewController {
         expense.leftAnchor.constraint(equalTo: self.incomeMoney.rightAnchor, constant: 15).isActive = true
         expense.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
-        expenseMoney.topAnchor.constraint(equalTo: self.incomeMoney.topAnchor, constant: -7).isActive = true
+        expenseMoney.topAnchor.constraint(equalTo: self.incomeMoney.topAnchor).isActive = true
         expenseMoney.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -15).isActive = true
         expenseMoney.widthAnchor.constraint(equalToConstant: 115).isActive = true
         
@@ -173,6 +193,71 @@ final class MonthViewController: UIViewController {
         mergeImage.topAnchor.constraint(equalTo: self.cash.centerYAnchor, constant: -2).isActive = true
         mergeImage.rightAnchor.constraint(equalTo: self.cash.leftAnchor, constant: -3).isActive = true
         mergeImage.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        dayCollecionView.topAnchor.constraint(equalTo: self.balanceMoney.bottomAnchor, constant: 9).isActive = true
+        dayCollecionView.leftAnchor.constraint(equalTo: self.income.leftAnchor).isActive = true
+        dayCollecionView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
+        dayCollecionView.heightAnchor.constraint(equalToConstant: DayCollectionViewCell.height).isActive = true
+        
+        seperlatorLine.topAnchor.constraint(equalTo: self.dayCollecionView.bottomAnchor, constant: 2).isActive = true
+        seperlatorLine.leftAnchor.constraint(equalTo: dayCollecionView.leftAnchor).isActive = true
+        seperlatorLine.rightAnchor.constraint(equalTo: dayCollecionView.rightAnchor).isActive = true
+        seperlatorLine.heightAnchor.constraint(equalToConstant: 0.3).isActive = true
     }
 
+    private func constructCollectionViews() {
+        self.dayCollecionView.delegate = self
+        self.dayCollecionView.dataSource = self
+        self.dayCollecionView.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: "DayCollectionViewCell")
+    }
+}
+
+extension MonthViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if collectionView is DayCollectionView {
+            return 1
+        }
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView is DayCollectionView {
+            return DayCollectionView.dayCount
+        }
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let collectionView = collectionView as? DayCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCollectionViewCell", for: indexPath) as? DayCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.day = collectionView.dayArr[indexPath.row]
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+}
+
+extension MonthViewController: UICollectionViewDelegate {
+    
+}
+
+extension MonthViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // 셀의 사이즈 정의
+        if collectionView is DayCollectionView {
+            return CGSize(width: collectionView.frame.width / 7, height: collectionView.frame.height)
+        }
+        return CGSize.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        // 셀 간 세로간격 조정
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        // 셀 간 가로간격 조정
+        return 0
+    }
 }

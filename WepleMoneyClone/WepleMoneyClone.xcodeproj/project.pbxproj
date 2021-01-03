@@ -16,6 +16,9 @@
 		C23DC7D625810C73003E30B7 /* MonthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DC7D525810C73003E30B7 /* MonthViewController.swift */; };
 		C23DC7DA25810C80003E30B7 /* WeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DC7D925810C80003E30B7 /* WeekViewController.swift */; };
 		C23DC7DD25810C8A003E30B7 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DC7DC25810C8A003E30B7 /* DayViewController.swift */; };
+		C23DE41C259F8973003E30B7 /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE41B259F8973003E30B7 /* DayCollectionViewCell.swift */; };
+		C23DE42125A23A9C003E30B7 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE42025A23A9C003E30B7 /* Utility.swift */; };
+		C23DE42925A251EE003E30B7 /* DayCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE42825A251EE003E30B7 /* DayCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		C23DC7D525810C73003E30B7 /* MonthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthViewController.swift; sourceTree = "<group>"; };
 		C23DC7D925810C80003E30B7 /* WeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewController.swift; sourceTree = "<group>"; };
 		C23DC7DC25810C8A003E30B7 /* DayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
+		C23DE41B259F8973003E30B7 /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
+		C23DE42025A23A9C003E30B7 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		C23DE42825A251EE003E30B7 /* DayCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 				C23DC7D425810C3E003E30B7 /* ViewController */,
 				C23DC7B92581055E003E30B7 /* AppDelegate.swift */,
 				C23DC7BB2581055E003E30B7 /* SceneDelegate.swift */,
+				C23DE42025A23A9C003E30B7 /* Utility.swift */,
 				C23DC7BF2581055E003E30B7 /* Main.storyboard */,
 				C23DC7C52581055F003E30B7 /* Assets.xcassets */,
 				C23DC7C72581055F003E30B7 /* LaunchScreen.storyboard */,
@@ -79,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				C23DC7D525810C73003E30B7 /* MonthViewController.swift */,
+				C23DE42825A251EE003E30B7 /* DayCollectionView.swift */,
+				C23DE41B259F8973003E30B7 /* DayCollectionViewCell.swift */,
 				C23DC7D925810C80003E30B7 /* WeekViewController.swift */,
 				C23DC7DC25810C8A003E30B7 /* DayViewController.swift */,
 			);
@@ -163,10 +172,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C23DC7DA25810C80003E30B7 /* WeekViewController.swift in Sources */,
+				C23DE41C259F8973003E30B7 /* DayCollectionViewCell.swift in Sources */,
 				C23DC7D625810C73003E30B7 /* MonthViewController.swift in Sources */,
 				C23DC7BA2581055E003E30B7 /* AppDelegate.swift in Sources */,
+				C23DE42125A23A9C003E30B7 /* Utility.swift in Sources */,
 				C23DC7C42581055E003E30B7 /* WepleMoneyClone.xcdatamodeld in Sources */,
 				C23DC7DD25810C8A003E30B7 /* DayViewController.swift in Sources */,
+				C23DE42925A251EE003E30B7 /* DayCollectionView.swift in Sources */,
 				C23DC7BC2581055E003E30B7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
