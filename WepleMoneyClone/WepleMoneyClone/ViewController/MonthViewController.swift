@@ -248,12 +248,17 @@ extension MonthViewController: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView is DayCollectionView {
+        switch collectionView {
+        case is DayCollectionView:
             return DayCollectionView.dayCount
-        } else if collectionView is MonthCalendarCollectionView {
-            return MonthCalendarCollectionView.dayCount
+        case is MonthCalendarCollectionView:
+            if let collectionView = collectionView as? MonthCalendarCollectionView {
+                return collectionView.dayArr.count
+            }
+            return 0
+        default:
+            return 0
         }
-        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

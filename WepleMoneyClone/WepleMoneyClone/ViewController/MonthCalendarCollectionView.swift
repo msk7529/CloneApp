@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 final class MonthCalendarCollectionView: UICollectionView {
-    static let dayCount: Int = 35
-    
     var dayArr: [Int] = []  // 캘린더상 노출되는 날짜들의 집합
     var numOfRow: Int = 0   // 캘린더상 노출되는 week의 개수
     var startIndex: Int = 0 // 이번달의 시작 날짜의 index
