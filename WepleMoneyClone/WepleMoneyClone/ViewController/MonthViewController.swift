@@ -127,9 +127,26 @@ final class MonthViewController: UIViewController {
         return seperlatorLine
     }()
     
+    lazy var calendarView: MonthCalendarCollectionView = {
+        let calendarView: MonthCalendarCollectionView = MonthCalendarCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        calendarView.backgroundColor = .clear
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        calendarView.isScrollEnabled = false
+        return calendarView
+    }()
+    
+    lazy var seperlatorLine2: UIView = {
+        let seperlatorLine: UIView = UIView(frame: .zero)
+        seperlatorLine.translatesAutoresizingMaskIntoConstraints = false
+        seperlatorLine.backgroundColor = UIColor(rgb: 0x3F3F3F)
+        return seperlatorLine
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        calendarView.currentMonth = 1
         
         makeUI()
         constructCollectionViews()
@@ -149,6 +166,8 @@ final class MonthViewController: UIViewController {
         self.view.addSubview(mergeImage)
         self.view.addSubview(dayCollecionView)
         self.view.addSubview(seperlatorLine)
+        self.view.addSubview(calendarView)
+        self.view.addSubview(seperlatorLine2)
         
         income.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         income.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
@@ -203,35 +222,66 @@ final class MonthViewController: UIViewController {
         seperlatorLine.leftAnchor.constraint(equalTo: dayCollecionView.leftAnchor).isActive = true
         seperlatorLine.rightAnchor.constraint(equalTo: dayCollecionView.rightAnchor).isActive = true
         seperlatorLine.heightAnchor.constraint(equalToConstant: 0.3).isActive = true
-    }
+        
+        calendarView.topAnchor.constraint(equalTo: self.seperlatorLine.bottomAnchor, constant: 3).isActive = true
+        calendarView.leftAnchor.constraint(equalTo: seperlatorLine.leftAnchor).isActive = true
+        calendarView.rightAnchor.constraint(equalTo: seperlatorLine.rightAnchor).isActive = true
+        calendarView.heightAnchor.constraint(equalToConstant: MonthCalendarCollectionViewCell.height * CGFloat(calendarView.numOfRow)).isActive = true
+        
+        seperlatorLine2.topAnchor.constraint(equalTo: self.calendarView.bottomAnchor, constant: 7).isActive = true
+        seperlatorLine2.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        seperlatorLine2.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        seperlatorLine2.heightAnchor.constraint(equalToConstant: 0.3).isActive = true    }
 
     private func constructCollectionViews() {
         self.dayCollecionView.delegate = self
         self.dayCollecionView.dataSource = self
-        self.dayCollecionView.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: "DayCollectionViewCell")
+        self.dayCollecionView.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
+        self.calendarView.delegate = self
+        self.calendarView.dataSource = self
+        self.calendarView.register(MonthCalendarCollectionViewCell.self, forCellWithReuseIdentifier: MonthCalendarCollectionViewCell.identifier)
     }
 }
 
 extension MonthViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if collectionView is DayCollectionView {
-            return 1
-        }
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView is DayCollectionView {
             return DayCollectionView.dayCount
+        } else if collectionView is MonthCalendarCollectionView {
+            return MonthCalendarCollectionView.dayCount
         }
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let collectionView = collectionView as? DayCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCollectionViewCell", for: indexPath) as? DayCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as? DayCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.day = collectionView.dayArr[indexPath.row]
+            
+            cell.day = DayCollectionView.daySringArr[indexPath.row]
+            return cell
+        } else if let collectionView = collectionView as? MonthCalendarCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MonthCalendarCollectionViewCell.identifier, for: indexPath) as? MonthCalendarCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.dayLabel.text = String(collectionView.dayArr[indexPath.row])
+            
+            let currentDayString: String = DayCollectionView.daySringArr[indexPath.row % 7]
+            if currentDayString == "토" {
+                cell.dayLabel.textColor = .systemBlue
+            } else if currentDayString == "일" {
+                cell.dayLabel.textColor = .systemPink
+            }
+            
+            if indexPath.row < collectionView.startIndex || indexPath.row > collectionView.endIndex {
+                cell.isCurrentMonth = false
+            }
+            
             return cell
         }
         return UICollectionViewCell()
@@ -247,6 +297,8 @@ extension MonthViewController: UICollectionViewDelegateFlowLayout {
         // 셀의 사이즈 정의
         if collectionView is DayCollectionView {
             return CGSize(width: collectionView.frame.width / 7, height: collectionView.frame.height)
+        } else if collectionView is MonthCalendarCollectionView {
+            return CGSize(width: collectionView.frame.width / 7, height: MonthCalendarCollectionViewCell.height)
         }
         return CGSize.zero
     }

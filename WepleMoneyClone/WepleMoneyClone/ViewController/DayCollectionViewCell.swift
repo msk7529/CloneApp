@@ -25,6 +25,7 @@ final class DayCollectionViewCell: UICollectionViewCell {
     }
     
     static let height: CGFloat = 10
+    static let identifier: String = "DayCollectionViewCell"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
