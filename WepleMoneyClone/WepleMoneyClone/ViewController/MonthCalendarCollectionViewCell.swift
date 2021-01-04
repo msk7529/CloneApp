@@ -40,6 +40,13 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.dayLabel.text = ""
+        self.dayLabel.textColor = .black
+    }
+    
     private func makeUI() {
         self.contentView.addSubview(dayLabel)
         

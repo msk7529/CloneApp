@@ -10,6 +10,8 @@ import Foundation
 
 final class MonthViewController: UIViewController {
 
+    // MARK: - UIComponents
+    
     lazy var income: UILabel = {
         let income: UILabel = UILabel()
         income.text = "수입"
@@ -127,6 +129,15 @@ final class MonthViewController: UIViewController {
         return seperlatorLine
     }()
     
+    lazy var seperlatorLine2: UIView = {
+        let seperlatorLine: UIView = UIView(frame: .zero)
+        seperlatorLine.translatesAutoresizingMaskIntoConstraints = false
+        seperlatorLine.backgroundColor = UIColor(rgb: 0x3F3F3F)
+        return seperlatorLine
+    }()
+    
+    // MARK: - Components for paging
+    
     lazy var calendarRootView: UIView = {
         let calendarRootView: UIView = UIView(frame: .zero)
         calendarRootView.backgroundColor = .clear
@@ -157,26 +168,23 @@ final class MonthViewController: UIViewController {
         
         for index in 0...2 {
             let vc: MonthCalendarViewController = MonthCalendarViewController()
-            vc.todayYearMonth = (todayYear!, todayMonth!)
+            vc.todayYearMonth = (todayYear, todayMonth)
             vc.view.tag = index
             viewControllers.append(vc)
         }
         return viewControllers
     }()
     
-    lazy var seperlatorLine2: UIView = {
-        let seperlatorLine: UIView = UIView(frame: .zero)
-        seperlatorLine.translatesAutoresizingMaskIntoConstraints = false
-        seperlatorLine.backgroundColor = UIColor(rgb: 0x3F3F3F)
-        return seperlatorLine
-    }()
+    // MARK: - Properties
     
     private let today: Date = Date()
-    private var todayYear: Int?
-    private var todayMonth: Int?
-    private var todayDay: Int?
+    private var todayYear: Int!
+    private var todayMonth: Int!
+    private var todayDay: Int!
     
-    private var calendarRootViewHeightConstraint: NSLayoutConstraint!
+    var calendarRootViewHeightConstraint: NSLayoutConstraint!   // calendarRootView의 높이조정을 위해 선언
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,6 +209,8 @@ final class MonthViewController: UIViewController {
         
         makeUI()
     }
+    
+    // MARK: - fuction
     
     private func makeUI() {
         self.view.addSubview(income)
@@ -291,7 +301,7 @@ final class MonthViewController: UIViewController {
         seperlatorLine2.heightAnchor.constraint(equalToConstant: 0.3).isActive = true
     }
     
-    private func beforeYearMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
+    func beforeYearMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
         var dateComponents: DateComponents = DateComponents()
         dateComponents.year = currentYear
         dateComponents.month = currentMonth
@@ -315,7 +325,7 @@ final class MonthViewController: UIViewController {
         return (beforeMonthDateComponents.year!, beforeMonthDateComponents.month!)
     }
     
-    private func afterYearMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
+    func afterYearMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
         var dateComponents: DateComponents = DateComponents()
         dateComponents.year = currentYear
         dateComponents.month = currentMonth
@@ -326,7 +336,7 @@ final class MonthViewController: UIViewController {
         calendar.locale = Locale(identifier: "ko")
         
         guard let currentDate = calendar.date(from: dateComponents) else {
-            print("Error occured in beforeYearMonth function")
+            print("Error occured in afterYearMonth function")
             return (0, 0)
         }
         
@@ -339,106 +349,13 @@ final class MonthViewController: UIViewController {
         return (afterMonthDateComponents.year!, afterMonthDateComponents.month!)
     }
     
-    private func setNavigationTitle(currentYear: Int, currentMonth: Int) {
+    func setNavigationTitle(currentYear: Int, currentMonth: Int) {
         if let todayYear = todayYear {
             if todayYear == currentYear {
                 self.navigationItem.title = "\(currentMonth)월"
             } else {
                 self.navigationItem.title = "\(currentYear)년 \(currentMonth)월"
             }
-        }
-    }
-}
-
-extension MonthViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DayCollectionView.dayCount
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let collectionView = collectionView as? DayCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as? DayCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-            
-            cell.day = DayCollectionView.daySringArr[indexPath.row]
-            return cell
-        }
-        return UICollectionViewCell()
-    }
-}
-
-extension MonthViewController: UICollectionViewDelegate {
-    
-}
-
-extension MonthViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 셀의 사이즈 정의
-        return CGSize(width: collectionView.frame.width / 7, height: collectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        // 셀 간 세로간격 조정
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        // 셀 간 가로간격 조정
-        return 0
-    }
-}
-
-extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let calendarVC = pageViewController.viewControllers?.first as? MonthCalendarViewController {
-            let yearMonth: (Int, Int) = beforeYearMonth(currentYear: calendarVC.calendarView.currentYear, currentMonth: calendarVC.calendarView.currentMonth)
-            let index: Int = calendarVC.view.tag
-            let nextIndex: Int = index > 0 ? index - 1 : monthCalendarViewControllers.count - 1
-            
-            let beforeCalendarVC: MonthCalendarViewController = monthCalendarViewControllers[nextIndex]
-            beforeCalendarVC.currentYear = yearMonth.0
-            beforeCalendarVC.currentMonth = yearMonth.1
-            
-            return beforeCalendarVC
-        }
-        return nil
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let calendarVC = pageViewController.viewControllers?.first as? MonthCalendarViewController {
-            let yearMonth: (Int, Int) = afterYearMonth(currentYear: calendarVC.calendarView.currentYear, currentMonth: calendarVC.calendarView.currentMonth)
-            let index: Int = calendarVC.view.tag
-            let nextIndex: Int = (index + 1) % monthCalendarViewControllers.count
-            
-            let afterCalendarVC: MonthCalendarViewController = monthCalendarViewControllers[nextIndex]
-            afterCalendarVC.currentYear = yearMonth.0
-            afterCalendarVC.currentMonth = yearMonth.1
-            
-            return afterCalendarVC
-        }
-        return nil
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if finished == true {
-            if let appearedVC = pageViewController.viewControllers?.first as? MonthCalendarViewController {
-                
-                calendarRootViewHeightConstraint.constant =  MonthCalendarCollectionViewCell.height * CGFloat(appearedVC.calendarView.numOfRow)
-                
-                setNavigationTitle(currentYear: appearedVC.currentYear, currentMonth: appearedVC.currentMonth)
-            }
-        }
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        pageViewController.view.isUserInteractionEnabled = false
-        let delay: Double = 0.5
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {
-            pageViewController.view.isUserInteractionEnabled = true
         }
     }
 }

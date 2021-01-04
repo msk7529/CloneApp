@@ -20,6 +20,7 @@ final class MonthCalendarCollectionView: UICollectionView {
             dayArr = []
             makeDayArr()
             calculateNumOfRow()
+            reloadData()
         }
     }
     
@@ -27,7 +28,7 @@ final class MonthCalendarCollectionView: UICollectionView {
         var dateComponents: DateComponents = DateComponents()
         dateComponents.year = currentYear
         dateComponents.month = currentMonth
-        dateComponents.day = 4
+        dateComponents.day = 1
         dateComponents.timeZone = .current
         
         var calendar: Calendar = Calendar(identifier: .gregorian)
