@@ -14,8 +14,10 @@ final class MonthCalendarCollectionView: UICollectionView {
     var startIndex: Int = 0 // 이번달의 시작 날짜의 index
     var endIndex: Int = 0   // 이번달의 마지막 날짜의 index
     
-    var currentMonth: Int = 1 {
+    var currentYear: Int!
+    var currentMonth: Int! {
         didSet {
+            dayArr = []
             makeDayArr()
             calculateNumOfRow()
         }
@@ -23,7 +25,7 @@ final class MonthCalendarCollectionView: UICollectionView {
     
     private func makeDayArr() {
         var dateComponents: DateComponents = DateComponents()
-        dateComponents.year = 2021
+        dateComponents.year = currentYear
         dateComponents.month = currentMonth
         dateComponents.day = 4
         dateComponents.timeZone = .current

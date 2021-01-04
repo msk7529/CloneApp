@@ -21,6 +21,7 @@
 		C23DE42925A251EE003E30B7 /* DayCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE42825A251EE003E30B7 /* DayCollectionView.swift */; };
 		C23DE42C25A2555F003E30B7 /* MonthCalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE42B25A2555F003E30B7 /* MonthCalendarCollectionView.swift */; };
 		C23DE42F25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE42E25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift */; };
+		C23DE43225A28AF5003E30B7 /* MonthCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE43125A28AF5003E30B7 /* MonthCalendarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		C23DE42825A251EE003E30B7 /* DayCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionView.swift; sourceTree = "<group>"; };
 		C23DE42B25A2555F003E30B7 /* MonthCalendarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarCollectionView.swift; sourceTree = "<group>"; };
 		C23DE42E25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		C23DE43125A28AF5003E30B7 /* MonthCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCalendarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				C23DC7D525810C73003E30B7 /* MonthViewController.swift */,
+				C23DE43125A28AF5003E30B7 /* MonthCalendarViewController.swift */,
 				C23DE42825A251EE003E30B7 /* DayCollectionView.swift */,
 				C23DE41B259F8973003E30B7 /* DayCollectionViewCell.swift */,
 				C23DE42B25A2555F003E30B7 /* MonthCalendarCollectionView.swift */,
@@ -186,6 +189,7 @@
 				C23DC7C42581055E003E30B7 /* WepleMoneyClone.xcdatamodeld in Sources */,
 				C23DC7DD25810C8A003E30B7 /* DayViewController.swift in Sources */,
 				C23DE42F25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift in Sources */,
+				C23DE43225A28AF5003E30B7 /* MonthCalendarViewController.swift in Sources */,
 				C23DE42925A251EE003E30B7 /* DayCollectionView.swift in Sources */,
 				C23DC7BC2581055E003E30B7 /* SceneDelegate.swift in Sources */,
 			);
