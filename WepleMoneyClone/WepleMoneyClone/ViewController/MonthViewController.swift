@@ -192,7 +192,7 @@ final class MonthViewController: UIViewController {
         todayMonth = Calendar.current.component(.month, from: today)
         todayYear = Calendar.current.component(.year, from: today)
         
-        self.navigationItem.title = "\(String(describing: todayMonth!))월"
+        setNavigation()
         
         self.dayCollecionView.delegate = self
         self.dayCollecionView.dataSource = self
@@ -298,6 +298,40 @@ final class MonthViewController: UIViewController {
         seperlatorLine2.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
         seperlatorLine2.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor).isActive = true
         seperlatorLine2.heightAnchor.constraint(equalToConstant: 0.3).isActive = true
+    }
+    
+    private func setNavigation() {
+        let textAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        
+        self.navigationItem.title = "\(String(describing: todayMonth!))월"
+        self.navigationController?.navigationBar.barTintColor = UIColor(rgb: 0x79BDB3)
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+
+        let leftBtn: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let rightBtn1: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let rightBtn2: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        
+        leftBtn.setImage(UIImage(named: "statisticsIcon")?.withTintColor(.white), for: .normal)
+        leftBtn.backgroundColor = .clear
+        rightBtn1.setImage(UIImage(named: "filterIcon")?.withTintColor(.white), for: .normal)
+        rightBtn1.backgroundColor = .clear
+        rightBtn2.setImage(UIImage(named: "searchIcon")?.withTintColor(.white), for: .normal)
+        rightBtn2.backgroundColor = .clear
+        
+        let leftBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: leftBtn)
+        let rightBarButtonItem1: UIBarButtonItem = UIBarButtonItem(customView: rightBtn1)
+        let rightBarButtonItem2: UIBarButtonItem = UIBarButtonItem(customView: rightBtn2)
+        
+        leftBarButtonItem.target = self
+        leftBarButtonItem.action = nil
+        rightBarButtonItem1.target = self
+        rightBarButtonItem1.action = nil
+        rightBarButtonItem2.target = self
+        rightBarButtonItem2.action = nil
+        
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem
+        self.navigationItem.rightBarButtonItems = [rightBarButtonItem1, rightBarButtonItem2]
     }
     
     func setNavigationTitle(currentYear: Int, currentMonth: Int) {
