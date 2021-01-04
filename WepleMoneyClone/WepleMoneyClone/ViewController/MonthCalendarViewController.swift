@@ -31,7 +31,6 @@ final class MonthCalendarViewController: UIViewController {
             }
         }
     }
-    var todayYearMonth: (Int, Int)!
     
     override func viewDidLoad() {
         super.viewDidLoad()

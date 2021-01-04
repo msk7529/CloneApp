@@ -168,7 +168,6 @@ final class MonthViewController: UIViewController {
         
         for index in 0...2 {
             let vc: MonthCalendarViewController = MonthCalendarViewController()
-            vc.todayYearMonth = (todayYear, todayMonth)
             vc.view.tag = index
             viewControllers.append(vc)
         }
@@ -301,54 +300,6 @@ final class MonthViewController: UIViewController {
         seperlatorLine2.heightAnchor.constraint(equalToConstant: 0.3).isActive = true
     }
     
-    func beforeYearMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
-        var dateComponents: DateComponents = DateComponents()
-        dateComponents.year = currentYear
-        dateComponents.month = currentMonth
-        dateComponents.day = 1
-        dateComponents.timeZone = .current
-        
-        var calendar: Calendar = Calendar(identifier: .gregorian)
-        calendar.locale = Locale(identifier: "ko")
-        
-        guard let currentDate = calendar.date(from: dateComponents) else {
-            print("Error occured in beforeYearMonth function")
-            return (0, 0)
-        }
-        
-        let currentMonthDatecomponents: DateComponents = calendar.dateComponents([.year, .month], from: currentDate)
-        let currentMonthDate: Date = calendar.date(from: currentMonthDatecomponents)!
-        
-        let beforeMonth: Date = calendar.date(byAdding: .month, value: -1, to: currentMonthDate)!
-        let beforeMonthDateComponents: DateComponents = calendar.dateComponents([.year, .month], from: beforeMonth)
-        
-        return (beforeMonthDateComponents.year!, beforeMonthDateComponents.month!)
-    }
-    
-    func afterYearMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
-        var dateComponents: DateComponents = DateComponents()
-        dateComponents.year = currentYear
-        dateComponents.month = currentMonth
-        dateComponents.day = 1
-        dateComponents.timeZone = .current
-        
-        var calendar: Calendar = Calendar(identifier: .gregorian)
-        calendar.locale = Locale(identifier: "ko")
-        
-        guard let currentDate = calendar.date(from: dateComponents) else {
-            print("Error occured in afterYearMonth function")
-            return (0, 0)
-        }
-        
-        let currentMonthDatecomponents: DateComponents = calendar.dateComponents([.year, .month], from: currentDate)
-        let currentMonthDate: Date = calendar.date(from: currentMonthDatecomponents)!
-        
-        let afterMonth: Date = calendar.date(byAdding: .month, value: +1, to: currentMonthDate)!
-        let afterMonthDateComponents: DateComponents = calendar.dateComponents([.year, .month], from: afterMonth)
-        
-        return (afterMonthDateComponents.year!, afterMonthDateComponents.month!)
-    }
-    
     func setNavigationTitle(currentYear: Int, currentMonth: Int) {
         if let todayYear = todayYear {
             if todayYear == currentYear {
@@ -357,5 +308,13 @@ final class MonthViewController: UIViewController {
                 self.navigationItem.title = "\(currentYear)년 \(currentMonth)월"
             }
         }
+    }
+    
+    func beforeYearMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
+        return currentMonth == 1 ? (currentYear - 1 , 12) : (currentYear, currentMonth - 1)
+    }
+    
+    func afterYearMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
+        return currentMonth == 12 ? (currentYear + 1, 1) : (currentYear, currentMonth + 1)
     }
 }
