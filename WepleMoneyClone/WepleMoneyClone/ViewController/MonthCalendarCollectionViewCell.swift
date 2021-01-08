@@ -8,9 +8,16 @@
 import Foundation
 import UIKit
 
+enum cellStatus {
+    case selected
+    case unselected
+}
+
 final class MonthCalendarCollectionViewCell: UICollectionViewCell {
     static let height: CGFloat = 55
     static let identifier: String = "MonthCalendarCollectionViewCell"
+    
+    var currentDayString: String!
     
     lazy var dayLabel: UILabel = {
         let dayLabel: UILabel = UILabel(frame: .zero)
@@ -25,6 +32,41 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         didSet {
             if isCurrentMonth == false {
                 dayLabel.textColor = .lightGray
+            }
+        }
+    }
+    
+    var isToday: Bool = false {
+        didSet {
+            if isToday == true {
+                dayLabel.font = UIFont.boldSystemFont(ofSize: 12)
+                dayLabel.textColor = .red
+                self.contentView.backgroundColor = UIColor.systemGray.withAlphaComponent(0.05)
+            } else {
+                if currentDayString == "토" {
+                    dayLabel.textColor = .systemPink
+                } else if currentDayString == "일" {
+                    dayLabel.textColor = .systemBlue
+                } else {
+                    dayLabel.textColor = .black
+                }
+                dayLabel.font = UIFont.systemFont(ofSize: 12)
+                self.contentView.backgroundColor = .clear
+            }
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected == true {
+                dayLabel.textColor = .white
+                dayLabel.font = UIFont.boldSystemFont(ofSize: 12)
+                self.contentView.backgroundColor = UIColor(rgb: 0xFFAADD)
+                self.layer.shadowColor = UIColor.black.cgColor
+                self.layer.shadowRadius = 30
+                self.layer.shadowOpacity = 0.2
+            } else {
+                isToday = isToday == true ? true : false
             }
         }
     }

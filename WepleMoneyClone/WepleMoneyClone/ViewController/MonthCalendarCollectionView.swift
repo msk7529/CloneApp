@@ -23,6 +23,7 @@ final class MonthCalendarCollectionView: UICollectionView {
             reloadData()
         }
     }
+    var currentDay: Int!
     
     private func makeDayArr() {
         var dateComponents: DateComponents = DateComponents()

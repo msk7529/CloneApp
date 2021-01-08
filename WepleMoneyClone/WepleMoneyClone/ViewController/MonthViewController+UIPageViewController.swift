@@ -42,7 +42,7 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
             // 화면전환이 완료되면 calendarRootView 높이 및 navi 셋팅
             if let appearedVC = pageViewController.viewControllers?.first as? MonthCalendarViewController {
                 
-                calendarRootViewHeightConstraint.constant =  MonthCalendarCollectionViewCell.height * CGFloat(appearedVC.calendarView.numOfRow)
+                calendarRootViewHeightConstraint.constant = MonthCalendarCollectionViewCell.height * CGFloat(appearedVC.calendarView.numOfRow)
                 
                 guard let year = appearedVC.currentYear, let month = appearedVC.currentMonth else {
                     print("Error occured in setNavigationTitle")

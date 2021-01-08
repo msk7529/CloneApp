@@ -136,6 +136,17 @@ final class MonthViewController: UIViewController {
         return seperlatorLine
     }()
     
+    lazy var plusButton: UIButton = {
+        let button: UIButton = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "plusButton"), for: .normal)
+        button.layer.shadowRadius = 10
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 2, height: 0)
+        button.layer.shadowOpacity = 0.2
+        return button
+    }()
+    
     // MARK: - Components for paging
     
     lazy var calendarRootView: UIView = {
@@ -203,6 +214,7 @@ final class MonthViewController: UIViewController {
         }
         monthCalendarVC.currentYear = todayYear
         monthCalendarVC.currentMonth = todayMonth
+        monthCalendarVC.currentDay = todayDay
         
         calendarPageViewController.setViewControllers([monthCalendarVC], direction: .forward, animated: false, completion: nil)
         
@@ -227,6 +239,7 @@ final class MonthViewController: UIViewController {
         self.view.addSubview(seperlatorLine)
         self.view.addSubview(calendarRootView)
         self.view.addSubview(seperlatorLine2)
+        self.view.addSubview(plusButton)
         
         income.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         income.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
@@ -298,6 +311,9 @@ final class MonthViewController: UIViewController {
         seperlatorLine2.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
         seperlatorLine2.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor).isActive = true
         seperlatorLine2.heightAnchor.constraint(equalToConstant: 0.3).isActive = true
+        
+        plusButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        plusButton.rightAnchor.constraint(equalTo: self.expenseMoney.rightAnchor).isActive = true
     }
     
     private func setNavigation() {

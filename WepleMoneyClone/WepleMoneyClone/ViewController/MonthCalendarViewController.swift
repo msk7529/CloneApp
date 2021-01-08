@@ -31,6 +31,13 @@ final class MonthCalendarViewController: UIViewController {
             }
         }
     }
+    var currentDay: Int? {
+        didSet {
+            if let currentDay = currentDay {
+                calendarView.currentDay = currentDay
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

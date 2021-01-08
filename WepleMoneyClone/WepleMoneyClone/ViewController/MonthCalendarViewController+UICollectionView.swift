@@ -24,14 +24,16 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            cell.dayLabel.text = String(collectionView.dayArr[indexPath.row])
-            
             let currentDayString: String = DayCollectionView.daySringArr[indexPath.row % 7]
-            if currentDayString == "토" {
-                cell.dayLabel.textColor = .systemBlue
-            } else if currentDayString == "일" {
-                cell.dayLabel.textColor = .systemPink
+            cell.currentDayString = currentDayString
+            
+            let dayNum: Int = collectionView.dayArr[indexPath.row]
+            if let todayDay = currentDay, todayDay == dayNum {
+                cell.isToday = true
+            } else {
+                cell.isToday = false
             }
+            cell.dayLabel.text = String(dayNum)
             
             if indexPath.row < collectionView.startIndex || indexPath.row > collectionView.endIndex {
                 cell.isCurrentMonth = false
