@@ -18,6 +18,7 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "MonthCalendarCollectionViewCell"
     
     var currentDayString: String!
+    var currentDate: Date!
     
     lazy var dayLabel: UILabel = {
         let dayLabel: UILabel = UILabel(frame: .zero)
@@ -65,6 +66,8 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
                 self.layer.shadowColor = UIColor.black.cgColor
                 self.layer.shadowRadius = 30
                 self.layer.shadowOpacity = 0.2
+                
+                SingleTon.shared.selectedDate = currentDate
             } else {
                 isToday = isToday == true ? true : false
             }
@@ -75,6 +78,7 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.backgroundColor = .clear
+        
         makeUI()
     }
     

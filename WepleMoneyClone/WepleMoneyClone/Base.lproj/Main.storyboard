@@ -41,6 +41,21 @@
             </objects>
             <point key="canvasLocation" x="2523.1884057971015" y="-394.41964285714283"/>
         </scene>
+        <!--Add Deal History View Controller-->
+        <scene sceneID="1nK-xx-hvk">
+            <objects>
+                <viewController storyboardIdentifier="AddDealHistoryViewController" id="vcx-yb-Jei" customClass="AddDealHistoryViewController" customModule="WepleMoneyClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YKU-OP-162">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="mk3-PA-bgV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bgx-81-400" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3321" y="-378"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="BfO-lJ-snl">
             <objects>

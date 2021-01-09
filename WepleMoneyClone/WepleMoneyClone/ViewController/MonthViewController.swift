@@ -140,6 +140,7 @@ final class MonthViewController: UIViewController {
         let button: UIButton = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "plusButton"), for: .normal)
+        button.addTarget(self, action: #selector(plusButtonDidTap), for: .touchUpInside)
         button.layer.shadowRadius = 10
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 2, height: 0)
@@ -198,7 +199,7 @@ final class MonthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         todayDay = Calendar.current.component(.day, from: today)
         todayMonth = Calendar.current.component(.month, from: today)
         todayYear = Calendar.current.component(.year, from: today)
@@ -357,6 +358,14 @@ final class MonthViewController: UIViewController {
             } else {
                 self.navigationItem.title = "\(currentYear)년 \(currentMonth)월"
             }
+        }
+    }
+    
+    @objc private func plusButtonDidTap() {
+        if let addVC = self.storyboard?.instantiateViewController(identifier: "AddDealHistoryViewController") {
+            addVC.modalTransitionStyle = .coverVertical
+            addVC.modalPresentationStyle = .fullScreen
+            self.present(addVC, animated: true, completion: nil)
         }
     }
     

@@ -17,6 +17,13 @@ final class MonthCalendarViewController: UIViewController {
         return calendarView
     }()
     
+    lazy var dateformatter: DateFormatter = {
+        let dateformatter: DateFormatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy MM dd"
+        dateformatter.timeZone = TimeZone(abbreviation: "UTC")
+        return dateformatter
+    }()
+    
     var currentYear: Int? {
         didSet {
             if let currentYear = currentYear {
@@ -51,5 +58,11 @@ final class MonthCalendarViewController: UIViewController {
         self.calendarView.delegate = self
         self.calendarView.dataSource = self
         self.calendarView.register(MonthCalendarCollectionViewCell.self, forCellWithReuseIdentifier: MonthCalendarCollectionViewCell.identifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.calendarView.reloadData()  // 뷰컨 페이징시 콜렉션뷰셀 미초기화 방지
     }
 }

@@ -11,10 +11,23 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    lazy var dateformatter: DateFormatter = {
+        let dateformatter: DateFormatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy MM dd"
+        dateformatter.timeZone = TimeZone(abbreviation: "UTC")
+        return dateformatter
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let todayDay: Int = Calendar.current.component(.day, from: Date())
+        let todayMonth: Int = Calendar.current.component(.month, from: Date())
+        let todayYear: Int = Calendar.current.component(.year, from: Date())
+        let today: Date? = dateformatter.date(from: "\(todayYear) \(todayMonth) \(todayDay)")
+        
+        SingleTon.shared.selectedDate = today   // 앱 실행시 선택날짜는 오늘날짜로 초기화
+        
         return true
     }
 

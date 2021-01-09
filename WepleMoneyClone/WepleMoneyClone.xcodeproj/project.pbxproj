@@ -25,6 +25,8 @@
 		C23DE43525A2F33D003E30B7 /* MonthViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE43425A2F33D003E30B7 /* MonthViewController+UICollectionView.swift */; };
 		C23DE43825A2F3C0003E30B7 /* MonthViewController+UIPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE43725A2F3C0003E30B7 /* MonthViewController+UIPageViewController.swift */; };
 		C23DE43B25A2F58A003E30B7 /* MonthCalendarViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DE43A25A2F58A003E30B7 /* MonthCalendarViewController+UICollectionView.swift */; };
+		C2F9D3DD25A8F9D700F6503D /* AddDealHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */; };
+		C2F9D3E025A90C4C00F6503D /* SingleTon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		C23DE43425A2F33D003E30B7 /* MonthViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonthViewController+UICollectionView.swift"; sourceTree = "<group>"; };
 		C23DE43725A2F3C0003E30B7 /* MonthViewController+UIPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonthViewController+UIPageViewController.swift"; sourceTree = "<group>"; };
 		C23DE43A25A2F58A003E30B7 /* MonthCalendarViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonthCalendarViewController+UICollectionView.swift"; sourceTree = "<group>"; };
+		C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDealHistoryViewController.swift; sourceTree = "<group>"; };
+		C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 				C23DC7D425810C3E003E30B7 /* ViewController */,
 				C23DC7B92581055E003E30B7 /* AppDelegate.swift */,
 				C23DC7BB2581055E003E30B7 /* SceneDelegate.swift */,
+				C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */,
 				C23DE42025A23A9C003E30B7 /* Utility.swift */,
 				C23DC7BF2581055E003E30B7 /* Main.storyboard */,
 				C23DC7C52581055F003E30B7 /* Assets.xcassets */,
@@ -108,6 +113,7 @@
 				C23DE42E25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift */,
 				C23DC7D925810C80003E30B7 /* WeekViewController.swift */,
 				C23DC7DC25810C8A003E30B7 /* DayViewController.swift */,
+				C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -190,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C23DC7DA25810C80003E30B7 /* WeekViewController.swift in Sources */,
+				C2F9D3DD25A8F9D700F6503D /* AddDealHistoryViewController.swift in Sources */,
 				C23DE41C259F8973003E30B7 /* DayCollectionViewCell.swift in Sources */,
 				C23DC7D625810C73003E30B7 /* MonthViewController.swift in Sources */,
 				C23DC7BA2581055E003E30B7 /* AppDelegate.swift in Sources */,
@@ -204,6 +211,7 @@
 				C23DE42925A251EE003E30B7 /* DayCollectionView.swift in Sources */,
 				C23DC7BC2581055E003E30B7 /* SceneDelegate.swift in Sources */,
 				C23DE43825A2F3C0003E30B7 /* MonthViewController+UIPageViewController.swift in Sources */,
+				C2F9D3E025A90C4C00F6503D /* SingleTon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

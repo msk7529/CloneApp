@@ -25,15 +25,26 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
             }
             
             let currentDayString: String = DayCollectionView.daySringArr[indexPath.row % 7]
-            cell.currentDayString = currentDayString
+            cell.currentDayString = currentDayString    // 셀에 해당하는 요일
             
             let dayNum: Int = collectionView.dayArr[indexPath.row]
+            let dayString: String = String(format: "%02d", dayNum)  // 셀의 날짜
             if let todayDay = currentDay, todayDay == dayNum {
                 cell.isToday = true
             } else {
                 cell.isToday = false
             }
             cell.dayLabel.text = String(dayNum)
+            
+            cell.currentDate = dateformatter.date(from: "\(currentYear!) \(currentMonth!) \(dayString)")
+            
+            if let selectedDate = SingleTon.shared.selectedDate {
+                if selectedDate == cell.currentDate {
+                    cell.isSelected = true
+                } else {
+                    cell.isSelected = false
+                }
+            }
             
             if indexPath.row < collectionView.startIndex || indexPath.row > collectionView.endIndex {
                 cell.isCurrentMonth = false
@@ -42,6 +53,10 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.reloadData()
     }
 }
 
