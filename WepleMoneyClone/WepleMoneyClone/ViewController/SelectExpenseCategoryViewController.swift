@@ -60,9 +60,9 @@ final class SelectExpenseCategoryViewController: UIViewController {
         return expenseCategoryCollectionView
     }()
     
-    var expensePrice: String = "0" {
+    var dataModel: ExpenseInfoModel? {
         didSet {
-            moneyLabel.text = expensePrice + "원"
+            moneyLabel.text = String(dataModel?.price ?? 0)
         }
     }
     

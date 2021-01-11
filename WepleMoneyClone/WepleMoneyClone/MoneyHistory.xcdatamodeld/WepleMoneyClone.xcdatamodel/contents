@@ -10,6 +10,7 @@
         <attribute name="photo" optional="YES" attributeType="Binary"/>
         <attribute name="price" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="repeatCycle" optional="YES" attributeType="String"/>
+        <attribute name="yearMonth" attributeType="String"/>
     </entity>
     <entity name="IncomeInfo" representedClassName="IncomeInfo" syncable="YES" codeGenerationType="class">
         <attribute name="category" attributeType="String"/>
@@ -20,9 +21,10 @@
         <attribute name="photo" optional="YES" attributeType="Binary"/>
         <attribute name="price" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="repeatCycle" optional="YES" attributeType="String"/>
+        <attribute name="yearMonth" attributeType="String"/>
     </entity>
     <elements>
-        <element name="IncomeInfo" positionX="-63" positionY="-18" width="128" height="163"/>
-        <element name="ExpenseInfo" positionX="-54" positionY="-9" width="128" height="178"/>
+        <element name="IncomeInfo" positionX="-63" positionY="-18" width="128" height="178"/>
+        <element name="ExpenseInfo" positionX="-54" positionY="-9" width="128" height="193"/>
     </elements>
 </model>

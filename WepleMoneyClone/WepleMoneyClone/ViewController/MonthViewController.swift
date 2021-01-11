@@ -362,9 +362,20 @@ final class MonthViewController: UIViewController {
     }
     
     @objc private func plusButtonDidTap() {
-        if let addVC = self.storyboard?.instantiateViewController(identifier: "AddDealHistoryViewController") {
+        if let addVC = self.storyboard?.instantiateViewController(identifier: "AddDealHistoryViewController") as? AddDealHistoryViewController {
             addVC.modalTransitionStyle = .coverVertical
             addVC.modalPresentationStyle = .fullScreen
+        
+            let selectedDate: Date = SingleTon.shared.selectedDate ?? Date()
+            let year: Int = Calendar.current.component(.year, from: selectedDate)
+            let month: Int = Calendar.current.component(.month, from: selectedDate)
+            
+            let dataModel: ExpenseInfoModel = ExpenseInfoModel()
+            dataModel.date = selectedDate
+            dataModel.yearMonth = "\(year)\(String(format: "%02d", month))"
+            
+            addVC.dataModel = dataModel
+            
             self.present(addVC, animated: true, completion: nil)
         }
     }

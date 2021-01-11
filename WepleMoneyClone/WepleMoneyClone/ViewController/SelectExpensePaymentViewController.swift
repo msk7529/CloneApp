@@ -68,7 +68,9 @@ final class SelectExpensePaymentViewController: UIViewController {
         return creditCardLabel
     }()
     
-    var category: String = ""
+    var dataModel: ExpenseInfoModel?
+    
+    private let expenseDAO: ExpenseDAO = ExpenseDAO()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,8 +84,6 @@ final class SelectExpensePaymentViewController: UIViewController {
         creditCardLabel.addGestureRecognizer(tapGestureRecognizer3)
         
         makeUI()
-        
-
     }
     
     private func makeUI() {
@@ -142,10 +142,25 @@ final class SelectExpensePaymentViewController: UIViewController {
     
     @objc private func cashLabelDidTap() {
         print("cash label did Tap")
+        
+        guard let model = dataModel else {
+            print("Error occured in cashLabelDidTap function")
+            return
+        }
+        model.payment = "현금"
+        
+        expenseDAO.saveHistory(model)
+        
+        closeButtonDidTap()
     }
     
     @objc private func checkCardLabelDidTap() {
         print("checkCard label did Tap")
+        
+        let test = expenseDAO.fetch(yearMonth: dataModel?.yearMonth ?? "202101")
+        for tt in test {
+            print(tt.category)
+        }
     }
     
     @objc func creditCardLabelDidTap() {

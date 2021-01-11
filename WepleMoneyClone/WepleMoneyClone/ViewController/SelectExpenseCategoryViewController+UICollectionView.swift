@@ -37,8 +37,12 @@ extension SelectExpenseCategoryViewController: UICollectionViewDataSource, UICol
                 transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
                 view.window!.layer.add(transition, forKey: kCATransition)
                 
+                dataModel?.category = category
+                dataModel?.info = InfoTextFiled.text ?? ""
+                
                 selectExpensePaymentVC.modalPresentationStyle = .fullScreen
-                selectExpensePaymentVC.category = category
+                selectExpensePaymentVC.dataModel = dataModel
+                
                 self.present(selectExpensePaymentVC, animated: false, completion: nil)
             }
         }

@@ -70,6 +70,8 @@ final class AddDealHistoryViewController: UIViewController {
         return button
     }()
     
+    var dataModel: ExpenseInfoModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -109,14 +111,14 @@ final class AddDealHistoryViewController: UIViewController {
     }
     
     private func parseSelectedDate() -> String {
-        guard let selectedDate = SingleTon.shared.selectedDate else {
+        guard let date = dataModel?.date else {
             return ""
         }
         
         let dateformatter: DateFormatter = DateFormatter()
         dateformatter.dateFormat = "yyyy/MM/dd"
         dateformatter.timeZone = TimeZone(abbreviation: "UTC")
-        return dateformatter.string(from: selectedDate)
+        return dateformatter.string(from: date)
     }
     
     @objc private func closeButtonDidTap() {
@@ -135,9 +137,12 @@ final class AddDealHistoryViewController: UIViewController {
             transition.subtype = CATransitionSubtype.fromRight
             transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
             view.window!.layer.add(transition, forKey: kCATransition)
+                        
+            dataModel?.price = Int32(moneyField.text ?? "0")
             
             selectExpenseCategoryVC.modalPresentationStyle = .fullScreen
-            selectExpenseCategoryVC.expensePrice = moneyField.text ?? "0"
+            selectExpenseCategoryVC.dataModel = dataModel
+
             self.present(selectExpenseCategoryVC, animated: false, completion: nil)
         }
     }
