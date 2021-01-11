@@ -10,7 +10,7 @@
 		C23DC7BA2581055E003E30B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DC7B92581055E003E30B7 /* AppDelegate.swift */; };
 		C23DC7BC2581055E003E30B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DC7BB2581055E003E30B7 /* SceneDelegate.swift */; };
 		C23DC7C12581055E003E30B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C23DC7BF2581055E003E30B7 /* Main.storyboard */; };
-		C23DC7C42581055E003E30B7 /* WepleMoneyClone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C23DC7C22581055E003E30B7 /* WepleMoneyClone.xcdatamodeld */; };
+		C23DC7C42581055E003E30B7 /* MoneyHistory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C23DC7C22581055E003E30B7 /* MoneyHistory.xcdatamodeld */; };
 		C23DC7C62581055F003E30B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C23DC7C52581055F003E30B7 /* Assets.xcassets */; };
 		C23DC7C92581055F003E30B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C23DC7C72581055F003E30B7 /* LaunchScreen.storyboard */; };
 		C23DC7D625810C73003E30B7 /* MonthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23DC7D525810C73003E30B7 /* MonthViewController.swift */; };
@@ -94,7 +94,7 @@
 				C23DC7C52581055F003E30B7 /* Assets.xcassets */,
 				C23DC7C72581055F003E30B7 /* LaunchScreen.storyboard */,
 				C23DC7CA2581055F003E30B7 /* Info.plist */,
-				C23DC7C22581055E003E30B7 /* WepleMoneyClone.xcdatamodeld */,
+				C23DC7C22581055E003E30B7 /* MoneyHistory.xcdatamodeld */,
 			);
 			path = WepleMoneyClone;
 			sourceTree = "<group>";
@@ -203,7 +203,7 @@
 				C23DE42125A23A9C003E30B7 /* Utility.swift in Sources */,
 				C23DE42C25A2555F003E30B7 /* MonthCalendarCollectionView.swift in Sources */,
 				C23DE43B25A2F58A003E30B7 /* MonthCalendarViewController+UICollectionView.swift in Sources */,
-				C23DC7C42581055E003E30B7 /* WepleMoneyClone.xcdatamodeld in Sources */,
+				C23DC7C42581055E003E30B7 /* MoneyHistory.xcdatamodeld in Sources */,
 				C23DC7DD25810C8A003E30B7 /* DayViewController.swift in Sources */,
 				C23DE42F25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift in Sources */,
 				C23DE43525A2F33D003E30B7 /* MonthViewController+UICollectionView.swift in Sources */,
@@ -417,13 +417,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C23DC7C22581055E003E30B7 /* WepleMoneyClone.xcdatamodeld */ = {
+		C23DC7C22581055E003E30B7 /* MoneyHistory.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				C23DC7C32581055E003E30B7 /* WepleMoneyClone.xcdatamodel */,
 			);
 			currentVersion = C23DC7C32581055E003E30B7 /* WepleMoneyClone.xcdatamodel */;
-			path = WepleMoneyClone.xcdatamodeld;
+			path = MoneyHistory.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
