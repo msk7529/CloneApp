@@ -43,6 +43,8 @@ final class AddDealHistoryViewController: UIViewController {
         moneyField.textAlignment = .right
         moneyField.keyboardType = .numberPad
         moneyField.becomeFirstResponder()
+        moneyField.text = "0"
+        moneyField.addTarget(self, action: #selector(moneyFieldDidChange), for: .editingChanged)
         return moneyField
     }()
     
@@ -72,7 +74,6 @@ final class AddDealHistoryViewController: UIViewController {
         super.viewDidLoad()
 
         makeUI()
-        
     }
     
     private func makeUI() {
@@ -127,17 +128,30 @@ final class AddDealHistoryViewController: UIViewController {
     }
     
     @objc private func expenseButtonDidTap() {
+        if let selectExpenseCategoryVC = self.storyboard?.instantiateViewController(identifier: "SelectExpenseCategoryViewController") as? SelectExpenseCategoryViewController {
+            let transition: CATransition = CATransition()
+            transition.type = CATransitionType.push
+            transition.duration = 0.3
+            transition.subtype = CATransitionSubtype.fromRight
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            view.window!.layer.add(transition, forKey: kCATransition)
+            
+            selectExpenseCategoryVC.modalPresentationStyle = .fullScreen
+            selectExpenseCategoryVC.expensePrice = moneyField.text ?? "0"
+            self.present(selectExpenseCategoryVC, animated: false, completion: nil)
+        }
+    }
+    
+    @objc private func moneyFieldDidChange() {
+        guard let text = moneyField.text else { return }
         
+        if !text.isEmpty {
+            if text.first == "0" {
+                let returnText: String = String(text.dropFirst(1))
+                moneyField.text = returnText
+            }
+        } else {
+            moneyField.text = "0"
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

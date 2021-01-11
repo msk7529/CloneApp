@@ -112,6 +112,36 @@
             </objects>
             <point key="canvasLocation" x="1611.5942028985507" y="288.61607142857139"/>
         </scene>
+        <!--Select Expense Category View Controller-->
+        <scene sceneID="BCa-8M-TYv">
+            <objects>
+                <viewController storyboardIdentifier="SelectExpenseCategoryViewController" id="sko-YW-oWB" customClass="SelectExpenseCategoryViewController" customModule="WepleMoneyClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dFa-yI-6Rc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="VRT-XJ-eOb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x21-Bd-VR2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4088" y="-378"/>
+        </scene>
+        <!--Select Expense Payment View Controller-->
+        <scene sceneID="O3X-t0-SVt">
+            <objects>
+                <viewController storyboardIdentifier="SelectExpensePaymentViewController" id="Sfw-Wg-LVk" customClass="SelectExpensePaymentViewController" customModule="WepleMoneyClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hWm-ss-Kxf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="5gg-CT-IRS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yT7-In-gwm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4865" y="-367"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
