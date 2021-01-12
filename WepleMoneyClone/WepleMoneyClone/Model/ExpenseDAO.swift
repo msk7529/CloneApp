@@ -15,10 +15,9 @@ final class ExpenseDAO {
     }()
     
     func fetch(yearMonth: String) -> [ExpenseInfoModel] {
-        // 검색 키워드가 없으면 전부 feth, 있으면 검색된 것만 fetch
         var expenseInfoList: [ExpenseInfoModel] = []
 
-        let fetchRequest: NSFetchRequest<ExpenseInfo> = ExpenseInfo.fetchRequest()   // 요청 객체 생성. fetchRequest 메서드는 NSManagedObject와 MemoMO 클래스에서 각각 정의되있고 이들은 오버라이드 관계가 아니어서 서로 다른 타입을 반환하게 된다. 따라서 타입 어노테이션을 누락하면 컴파일 에러가 발생
+        let fetchRequest: NSFetchRequest<ExpenseInfo> = ExpenseInfo.fetchRequest()   // 요청 객체 생성. fetchRequest 메서드는 NSManagedObject와 ExpenseInfo 클래스에서 각각 정의되있고 이들은 오버라이드 관계가 아니어서 서로 다른 타입을 반환하게 된다. 따라서 타입 어노테이션을 누락하면 컴파일 에러가 발생
         let regdateDesc: NSSortDescriptor = NSSortDescriptor(key: "createAt", ascending: false)  // 최신 내역 순으로 정렬하도록 정렬 객체 생성
         fetchRequest.sortDescriptors = [regdateDesc]
 
@@ -28,6 +27,44 @@ final class ExpenseDAO {
             print("Error! fetch string is empty.")
             return expenseInfoList
         }
+
+        do {
+            // 읽어온 결과 집합을 순회하면서 [ExpenseInfoModel] 타입으로 변환한다.
+            let resultset: [ExpenseInfo] = try self.context.fetch(fetchRequest)
+
+            for record in resultset {
+                // ExpenseInfoModel 객체를 생성한다.
+                let model: ExpenseInfoModel = ExpenseInfoModel()
+                model.category = record.category
+                model.createAt = record.createAt
+                model.date = record.date
+                model.info = record.info
+                model.objectID = record.objectID
+                model.payment = record.payment
+                model.price = record.price
+                model.repeatCycle = record.repeatCycle
+                model.yearMonth = record.yearMonth
+                
+                // 이미지가 있을 때만 복사
+                if let image = record.photo as Data? {
+                    model.photo = UIImage(data: image)
+                }
+                
+                expenseInfoList.append(model)
+            }
+        } catch let error as NSError {
+            NSLog("An error has occured : %s", error.localizedDescription)
+        }
+        return expenseInfoList
+    }
+    
+    func fetchAtCertainDate(date: Date) -> [ExpenseInfoModel] {
+        var expenseInfoList: [ExpenseInfoModel] = []
+
+        let fetchRequest: NSFetchRequest<ExpenseInfo> = ExpenseInfo.fetchRequest()   // 요청 객체 생성. fetchRequest 메서드는 NSManagedObject와 ExpenseInfo 클래스에서 각각 정의되있고 이들은 오버라이드 관계가 아니어서 서로 다른 타입을 반환하게 된다. 따라서 타입 어노테이션을 누락하면 컴파일 에러가 발생
+        let regdateDesc: NSSortDescriptor = NSSortDescriptor(key: "createAt", ascending: false)  // 최신 내역 순으로 정렬하도록 정렬 객체 생성
+        fetchRequest.sortDescriptors = [regdateDesc]
+        fetchRequest.predicate = NSPredicate(format: "date == %@", date as CVarArg)
 
         do {
             // 읽어온 결과 집합을 순회하면서 [ExpenseInfoModel] 타입으로 변환한다.

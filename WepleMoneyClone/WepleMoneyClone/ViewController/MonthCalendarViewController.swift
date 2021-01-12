@@ -77,6 +77,13 @@ final class MonthCalendarViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.calendarView.reloadData()  // 뷰컨 페이징시 콜렉션뷰 선택된 셀 초기화되지 않는 문제.
+
+        let selectedDate: Date? = SingleTon.shared.selectedDate
+        if selectedDate != nil {
+            // 앱 첫 실행후, 오늘날짜에 해당하는 테이블뷰가 노출되지 않는 문제해결을 위한 처리
+            let selectedDateFetchResult: [ExpenseInfoModel] = expenseDAO.fetchAtCertainDate(date: selectedDate!)
+            self.reloadDailyHistoryInfoIfNeeded?(selectedDateFetchResult)
+        }
     }
     
     deinit {

@@ -17,6 +17,14 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
             beforeCalendarVC.currentYear = yearMonth.0
             beforeCalendarVC.currentMonth = yearMonth.1
             beforeCalendarVC.expenseInfoList = expenseDAO.fetch(yearMonth: "\(yearMonth.0)\(String(format: "%02d", yearMonth.1))")
+            
+            beforeCalendarVC.showDailyHistoryInfo = { [weak self] expenseInfoModel in
+                // 캘린더뷰의 날짜를 터치했을때 실행되는 클로저. 테이블뷰를 갱신한다.
+                guard let strongSelf = self else { return }
+                
+                strongSelf.tableView.expenseInfo = expenseInfoModel
+                strongSelf.tableView.reloadData()
+            }
 
             return beforeCalendarVC
         }
@@ -33,6 +41,14 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
             afterCalendarVC.currentYear = yearMonth.0
             afterCalendarVC.currentMonth = yearMonth.1
             afterCalendarVC.expenseInfoList = expenseDAO.fetch(yearMonth: "\(yearMonth.0)\(String(format: "%02d", yearMonth.1))")
+            
+            afterCalendarVC.showDailyHistoryInfo = { [weak self] expenseInfoModel in
+                // 캘린더뷰의 날짜를 터치했을때 실행되는 클로저. 테이블뷰를 갱신한다.
+                guard let strongSelf = self else { return }
+                
+                strongSelf.tableView.expenseInfo = expenseInfoModel
+                strongSelf.tableView.reloadData()
+            }
             
             return afterCalendarVC
         }
