@@ -247,6 +247,15 @@ final class MonthViewController: UIViewController {
             strongSelf.tableView.reloadData()
         }
         
+        monthCalendarVC.showMonthlyExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense in
+            // 월간 입금/지출금액 표시
+            guard let strongSelf = self else { return }
+            
+            strongSelf.expenseMoney.text = String(totalExpense) + "원"
+            strongSelf.cashMoney.text = String(totalCashExpense) + "원"
+            strongSelf.cardMoney.text = String(totalCardExpense) + "원"
+        }
+        
         calendarPageViewController.setViewControllers([monthCalendarVC], direction: .forward, animated: false, completion: nil)
         
         makeUI()

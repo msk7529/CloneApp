@@ -158,6 +158,21 @@ final class SelectExpensePaymentViewController: UIViewController {
     @objc private func checkCardLabelDidTap() {
         print("checkCard label did Tap")
         
+        guard let model = dataModel else {
+            print("Error occured in cashLabelDidTap function")
+            return
+        }
+        model.payment = "체크카드"
+        
+        expenseDAO.saveHistory(model)
+        
+        closeButtonDidTap()
+        NotificationCenter.default.post(name: NSNotification.Name("AddHistoryNotification"), object: nil)
+    }
+    
+    @objc func creditCardLabelDidTap() {
+        print("creditCard label did Tap")
+        
         let test = expenseDAO.fetch(yearMonth: dataModel?.yearMonth ?? "202012")
         for tt in test {
             expenseDAO.delete(tt.objectID!)
@@ -167,9 +182,5 @@ final class SelectExpensePaymentViewController: UIViewController {
         for tt in testt {
             expenseDAO.delete(tt.objectID!)
         }
-    }
-    
-    @objc func creditCardLabelDidTap() {
-        print("creditCard label did Tap")
     }
 }

@@ -25,6 +25,15 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
                 strongSelf.tableView.expenseInfo = expenseInfoModel
                 strongSelf.tableView.reloadData()
             }
+            
+            beforeCalendarVC.showMonthlyExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense in
+                // 월간 입금/지출금액 표시
+                guard let strongSelf = self else { return }
+                
+                strongSelf.expenseMoney.text = String(totalExpense) + "원"
+                strongSelf.cashMoney.text = String(totalCashExpense) + "원"
+                strongSelf.cardMoney.text = String(totalCardExpense) + "원"
+            }
 
             return beforeCalendarVC
         }
@@ -48,6 +57,15 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
                 
                 strongSelf.tableView.expenseInfo = expenseInfoModel
                 strongSelf.tableView.reloadData()
+            }
+            
+            afterCalendarVC.showMonthlyExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense in
+                // 월간 입금/지출금액 표시
+                guard let strongSelf = self else { return }
+                
+                strongSelf.expenseMoney.text = String(totalExpense) + "원"
+                strongSelf.cashMoney.text = String(totalCashExpense) + "원"
+                strongSelf.cardMoney.text = String(totalCardExpense) + "원"
             }
             
             return afterCalendarVC
