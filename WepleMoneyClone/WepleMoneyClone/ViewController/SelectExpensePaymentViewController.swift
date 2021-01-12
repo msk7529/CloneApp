@@ -152,14 +152,20 @@ final class SelectExpensePaymentViewController: UIViewController {
         expenseDAO.saveHistory(model)
         
         closeButtonDidTap()
+        NotificationCenter.default.post(name: NSNotification.Name("AddHistoryNotification"), object: nil)
     }
     
     @objc private func checkCardLabelDidTap() {
         print("checkCard label did Tap")
         
-        let test = expenseDAO.fetch(yearMonth: dataModel?.yearMonth ?? "202101")
+        let test = expenseDAO.fetch(yearMonth: dataModel?.yearMonth ?? "202012")
         for tt in test {
-            print(tt.category)
+            expenseDAO.delete(tt.objectID!)
+        }
+        
+        let testt = expenseDAO.fetch(yearMonth: dataModel?.yearMonth ?? "202101")
+        for tt in testt {
+            expenseDAO.delete(tt.objectID!)
         }
     }
     

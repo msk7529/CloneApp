@@ -16,6 +16,7 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
             let beforeCalendarVC: MonthCalendarViewController = monthCalendarViewControllers[nextIndex]
             beforeCalendarVC.currentYear = yearMonth.0
             beforeCalendarVC.currentMonth = yearMonth.1
+            beforeCalendarVC.expenseInfoList = expenseDAO.fetch(yearMonth: "\(yearMonth.0)\(String(format: "%02d", yearMonth.1))")
 
             return beforeCalendarVC
         }
@@ -31,6 +32,7 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
             let afterCalendarVC: MonthCalendarViewController = monthCalendarViewControllers[nextIndex]
             afterCalendarVC.currentYear = yearMonth.0
             afterCalendarVC.currentMonth = yearMonth.1
+            afterCalendarVC.expenseInfoList = expenseDAO.fetch(yearMonth: "\(yearMonth.0)\(String(format: "%02d", yearMonth.1))")
             
             return afterCalendarVC
         }

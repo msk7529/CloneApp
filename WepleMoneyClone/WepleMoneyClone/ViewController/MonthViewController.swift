@@ -193,6 +193,7 @@ final class MonthViewController: UIViewController {
     private var todayMonth: Int!
     private var todayDay: Int!
     
+    var expenseDAO: ExpenseDAO = ExpenseDAO()
     var calendarRootViewHeightConstraint: NSLayoutConstraint!   // calendarRootView의 높이조정을 위해 선언
     
     // MARK: - LifeCycle
@@ -216,6 +217,7 @@ final class MonthViewController: UIViewController {
         monthCalendarVC.currentYear = todayYear
         monthCalendarVC.currentMonth = todayMonth
         monthCalendarVC.currentDay = todayDay
+        monthCalendarVC.expenseInfoList = expenseDAO.fetch(yearMonth: "\(String(describing: todayYear!))\(String(format: "%02d", todayMonth))")
         
         calendarPageViewController.setViewControllers([monthCalendarVC], direction: .forward, animated: false, completion: nil)
         

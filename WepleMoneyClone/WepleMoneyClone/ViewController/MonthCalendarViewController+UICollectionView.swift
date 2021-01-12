@@ -36,18 +36,25 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
             }
             cell.dayLabel.text = String(dayNum)
             
-            cell.currentDate = dateformatter.date(from: "\(currentYear!) \(currentMonth!) \(dayString)")
+            let currentDate: Date = dateformatter.date(from: "\(currentYear!) \(currentMonth!) \(dayString)") ?? Date()
+            cell.currentDate = currentDate
+            
+            let isUnActiveCell: Bool = indexPath.row < collectionView.startIndex || indexPath.row > collectionView.endIndex     // 비활성화되는 셀
+            
+            if isUnActiveCell {
+                cell.isCurrentMonth = false
+            }
             
             if let selectedDate = SingleTon.shared.selectedDate {
-                if selectedDate == cell.currentDate {
+                if selectedDate == cell.currentDate && isUnActiveCell == false {
                     cell.isSelected = true
                 } else {
                     cell.isSelected = false
                 }
             }
             
-            if indexPath.row < collectionView.startIndex || indexPath.row > collectionView.endIndex {
-                cell.isCurrentMonth = false
+            if let expenseModel = collectionView.fetchOnlyOneExpenseHistory(date: currentDate) {
+                cell.price = expenseModel.price ?? 0
             }
             
             return cell

@@ -85,18 +85,18 @@ final class ExpenseDAO {
         }
     }
     
-//    func delete(_ objectID: NSManagedObjectID) -> Bool {
-//        // 삭제할 객체를 찾아, 컨텍스트에서 삭제한다.
-//        let object: NSManagedObject = self.context.object(with: objectID)
-//        self.context.delete(object)
-//
-//        do {
-//            // 삭제한 내역을 영구저장소에 반환한다.
-//            try self.context.save()
-//            return true
-//        } catch let error as NSError {
-//            NSLog("An error has occured : %s", error.localizedDescription)
-//            return false
-//        }
-//    }
+    func delete(_ objectID: NSManagedObjectID) -> Bool {
+        // 삭제할 객체를 찾아, 컨텍스트에서 삭제한다.
+        let object: NSManagedObject = self.context.object(with: objectID)
+        self.context.delete(object)
+
+        do {
+            // 삭제한 내역을 영구저장소에 반환한다.
+            try self.context.save()
+            return true
+        } catch let error as NSError {
+            NSLog("An error has occured : %s", error.localizedDescription)
+            return false
+        }
+    }
 }

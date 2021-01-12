@@ -46,6 +46,14 @@ final class MonthCalendarViewController: UIViewController {
         }
     }
     
+    var expenseInfoList: [ExpenseInfoModel] = [] {
+        didSet {
+            calendarView.expenseInfoList = expenseInfoList
+        }
+    }
+    
+    private var expenseDAO: ExpenseDAO = ExpenseDAO()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                         
@@ -58,11 +66,27 @@ final class MonthCalendarViewController: UIViewController {
         self.calendarView.delegate = self
         self.calendarView.dataSource = self
         self.calendarView.register(MonthCalendarCollectionViewCell.self, forCellWithReuseIdentifier: MonthCalendarCollectionViewCell.identifier)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveAddHistoryNotification(_:)), name: NSNotification.Name("AddHistoryNotification"), object: nil)   // 입금/지출 등록후, 모달이 모두 닫히고 돌아왔을때 캘린더뷰에 등록된 내역이 노출되지 않는문제.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.calendarView.reloadData()  // 뷰컨 페이징시 콜렉션뷰셀 미초기화 방지
+        self.calendarView.reloadData()  // 뷰컨 페이징시 콜렉션뷰 선택된 셀 초기화되지 않는 문제.
+    }
+    
+    deinit {
+        print("###current MonthCalenderVC deinit. \(currentYear!)년 \(currentMonth!)월###")
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("AddHistoryNotification"), object: nil)
+    }
+
+    @objc private func didReceiveAddHistoryNotification(_ notification: Notification) {
+        if currentYear == nil || currentMonth == nil { return }
+        
+        print("###didReceiveAddHistoryNotification###")
+        print("\(currentYear!)년 \(currentMonth!)월")
+        
+        self.expenseInfoList = expenseDAO.fetch(yearMonth: "\(String(describing: currentYear!))\(String(format: "%02d", currentMonth!))")
     }
 }

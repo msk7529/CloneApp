@@ -17,6 +17,7 @@ final class MonthCalendarCollectionView: UICollectionView {
     var currentYear: Int!
     var currentMonth: Int! {
         didSet {
+            //expenseInfoList = []
             dayArr = []
             makeDayArr()
             calculateNumOfRow()
@@ -24,6 +25,7 @@ final class MonthCalendarCollectionView: UICollectionView {
         }
     }
     var currentDay: Int!
+    var expenseInfoList: [ExpenseInfoModel] = []
     
     private func makeDayArr() {
         var dateComponents: DateComponents = DateComponents()
@@ -103,5 +105,9 @@ final class MonthCalendarCollectionView: UICollectionView {
         if let index = dayArr.lastIndex(of: endDay) {
             endIndex = index
         }
+    }
+    
+    func fetchOnlyOneExpenseHistory(date: Date) -> ExpenseInfoModel? {
+        return expenseInfoList.first(where: { $0.date == date })
     }
 }

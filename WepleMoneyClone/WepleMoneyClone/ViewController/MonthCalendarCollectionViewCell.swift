@@ -28,14 +28,17 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         return dayLabel
     }()
+    
+    lazy var expenseMoneyLabel: UILabel = {
+        let expenseMoneyLabel: UILabel = UILabel(frame: .zero)
+        expenseMoneyLabel.font = UIFont.systemFont(ofSize: 10)
+        expenseMoneyLabel.textColor = UIColor(rgb: 0xF68DA9)
+        expenseMoneyLabel.textAlignment = .center
+        expenseMoneyLabel.translatesAutoresizingMaskIntoConstraints = false
+        return expenseMoneyLabel
+    }()
         
-    var isCurrentMonth: Bool = true {
-        didSet {
-            if isCurrentMonth == false {
-                dayLabel.textColor = .lightGray
-            }
-        }
-    }
+    var isCurrentMonth: Bool = true
     
     var isToday: Bool = false {
         didSet {
@@ -44,7 +47,9 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
                 dayLabel.textColor = .red
                 self.contentView.backgroundColor = UIColor.systemGray.withAlphaComponent(0.05)
             } else {
-                if currentDayString == "토" {
+                if isCurrentMonth == false {
+                    dayLabel.textColor = .lightGray
+                } else if currentDayString == "토" {
                     dayLabel.textColor = .systemPink
                 } else if currentDayString == "일" {
                     dayLabel.textColor = .systemBlue
@@ -57,17 +62,30 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var price: Int32 = 0 {
+        didSet {
+            if isCurrentMonth == true {
+                expenseMoneyLabel.text = String(price)
+            }
+        }
+    }
+    
     override var isSelected: Bool {
         didSet {
             if isSelected == true {
                 dayLabel.textColor = .white
                 dayLabel.font = UIFont.boldSystemFont(ofSize: 12)
+                expenseMoneyLabel.textColor = .white
                 self.contentView.backgroundColor = UIColor(rgb: 0xFFAADD)
                 self.layer.shadowColor = UIColor.black.cgColor
                 self.layer.shadowRadius = 30
                 self.layer.shadowOpacity = 0.2
                 
-                SingleTon.shared.selectedDate = currentDate
+                if isCurrentMonth == true {
+                    SingleTon.shared.selectedDate = currentDate
+                } else {
+                    dayLabel.textColor = .lightGray
+                }
             } else {
                 isToday = isToday == true ? true : false
             }
@@ -89,17 +107,25 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        self.isCurrentMonth = true
         self.dayLabel.text = ""
         self.dayLabel.textColor = .black
+        self.expenseMoneyLabel.textColor = UIColor(rgb: 0xF68DA9)
+        self.expenseMoneyLabel.text = ""
     }
     
     private func makeUI() {
         self.contentView.addSubview(dayLabel)
+        self.contentView.addSubview(expenseMoneyLabel)
         
         dayLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         dayLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
         dayLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
         dayLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        expenseMoneyLabel.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 5).isActive = true
+        expenseMoneyLabel.leftAnchor.constraint(equalTo: self.dayLabel.leftAnchor).isActive = true
+        expenseMoneyLabel.rightAnchor.constraint(equalTo: self.dayLabel.rightAnchor).isActive = true
     }
     
 }
