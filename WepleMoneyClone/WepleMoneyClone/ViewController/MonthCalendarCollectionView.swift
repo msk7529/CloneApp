@@ -107,7 +107,7 @@ final class MonthCalendarCollectionView: UICollectionView {
         }
     }
     
-    func fetchOnlyOneExpenseHistory(date: Date) -> ExpenseInfoModel? {
-        return expenseInfoList.first(where: { $0.date == date })
+    func fetchOneDayExpenseInfoModel(date: Date) -> [ExpenseInfoModel] {
+        return expenseInfoList.filter({ $0.date == date })
     }
 }

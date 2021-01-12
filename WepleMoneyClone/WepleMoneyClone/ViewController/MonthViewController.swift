@@ -136,6 +136,15 @@ final class MonthViewController: UIViewController {
         return seperlatorLine
     }()
     
+    lazy var tableView: DailyHistoryInfoTableView = {
+        let tableView: DailyHistoryInfoTableView = DailyHistoryInfoTableView(frame: .zero, style: .plain)
+        tableView.backgroundColor = .clear
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorInset.left = 0   // 기본적으로 들어가있는 테이블뷰셀의 왼쪽 여백 없애기
+        tableView.tableFooterView = UIView(frame: .zero)    // 빈 셀 안 보이게 처리
+        return tableView
+    }()
+    
     lazy var plusButton: UIButton = {
         let button: UIButton = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -210,6 +219,9 @@ final class MonthViewController: UIViewController {
         self.dayCollecionView.delegate = self
         self.dayCollecionView.dataSource = self
         self.dayCollecionView.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(DailyHistoryInfoTableViewCell.self, forCellReuseIdentifier: DailyHistoryInfoTableViewCell.identifier)
         
         guard let monthCalendarVC = monthCalendarViewControllers.first else {
             return
@@ -218,6 +230,22 @@ final class MonthViewController: UIViewController {
         monthCalendarVC.currentMonth = todayMonth
         monthCalendarVC.currentDay = todayDay
         monthCalendarVC.expenseInfoList = expenseDAO.fetch(yearMonth: "\(String(describing: todayYear!))\(String(format: "%02d", todayMonth))")
+        
+        monthCalendarVC.showDailyHistoryInfo = { [weak self] expenseInfoModel in
+            // 캘린더뷰의 날짜를 터치했을때 실행되는 클로저. 테이블뷰를 갱신한다.
+            guard let strongSelf = self else { return }
+            
+            strongSelf.tableView.expenseInfo = expenseInfoModel
+            strongSelf.tableView.reloadData()
+        }
+        
+        monthCalendarVC.reloadDailyHistoryInfoIfNeeded = { [weak self] expenseInfoModel in
+            // 입금/지출내역을 등록한 뒤 실행되는 클로저. 테이블뷰를 갱신한다.
+            guard let strongSelf = self else { return }
+            
+            strongSelf.tableView.expenseInfo = expenseInfoModel
+            strongSelf.tableView.reloadData()
+        }
         
         calendarPageViewController.setViewControllers([monthCalendarVC], direction: .forward, animated: false, completion: nil)
         
@@ -242,6 +270,7 @@ final class MonthViewController: UIViewController {
         self.view.addSubview(seperlatorLine)
         self.view.addSubview(calendarRootView)
         self.view.addSubview(seperlatorLine2)
+        self.view.addSubview(tableView)
         self.view.addSubview(plusButton)
         
         income.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
@@ -314,6 +343,11 @@ final class MonthViewController: UIViewController {
         seperlatorLine2.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
         seperlatorLine2.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor).isActive = true
         seperlatorLine2.heightAnchor.constraint(equalToConstant: 0.3).isActive = true
+        
+        tableView.topAnchor.constraint(equalTo: self.seperlatorLine2.bottomAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         plusButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         plusButton.rightAnchor.constraint(equalTo: self.expenseMoney.rightAnchor).isActive = true

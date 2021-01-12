@@ -53,9 +53,7 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
                 }
             }
             
-            if let expenseModel = collectionView.fetchOnlyOneExpenseHistory(date: currentDate) {
-                cell.price = expenseModel.price ?? 0
-            }
+            cell.expenseModel = collectionView.fetchOneDayExpenseInfoModel(date: currentDate)
             
             return cell
         }
@@ -63,6 +61,12 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let collectionView = collectionView as? MonthCalendarCollectionView else { return }
+
+        if let cell = collectionView.cellForItem(at: indexPath) as? MonthCalendarCollectionViewCell {
+            self.showDailyHistoryInfo?(cell.expenseModel)
+        }
+        
         collectionView.reloadData()
     }
 }

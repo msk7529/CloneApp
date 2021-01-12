@@ -52,6 +52,9 @@ final class MonthCalendarViewController: UIViewController {
         }
     }
     
+    var showDailyHistoryInfo: (([ExpenseInfoModel]) -> Void)?
+    var reloadDailyHistoryInfoIfNeeded: (([ExpenseInfoModel]) -> Void)?
+    
     private var expenseDAO: ExpenseDAO = ExpenseDAO()
     
     override func viewDidLoad() {
@@ -87,6 +90,10 @@ final class MonthCalendarViewController: UIViewController {
         print("###didReceiveAddHistoryNotification###")
         print("\(currentYear!)년 \(currentMonth!)월")
         
-        self.expenseInfoList = expenseDAO.fetch(yearMonth: "\(String(describing: currentYear!))\(String(format: "%02d", currentMonth!))")
+        let fetchResult: [ExpenseInfoModel] = expenseDAO.fetch(yearMonth: "\(String(describing: currentYear!))\(String(format: "%02d", currentMonth!))")
+        self.expenseInfoList = fetchResult
+        
+        let filterSelectedDayFetchResult: [ExpenseInfoModel] = fetchResult.filter { $0.date == SingleTon.shared.selectedDate }
+        self.reloadDailyHistoryInfoIfNeeded?(filterSelectedDayFetchResult)
     }
 }

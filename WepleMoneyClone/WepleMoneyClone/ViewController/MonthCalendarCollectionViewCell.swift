@@ -62,10 +62,11 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    var price: Int32 = 0 {
+    var expenseModel: [ExpenseInfoModel] = [] {
         didSet {
-            if isCurrentMonth == true {
-                expenseMoneyLabel.text = String(price)
+            if !expenseModel.isEmpty && isCurrentMonth == true {
+                let totalPrice: Int32 = caculateTotalPrice()
+                expenseMoneyLabel.text = String(totalPrice)
             }
         }
     }
@@ -128,4 +129,8 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         expenseMoneyLabel.rightAnchor.constraint(equalTo: self.dayLabel.rightAnchor).isActive = true
     }
     
+    private func caculateTotalPrice() -> Int32 {
+        let prices: [Int32] = self.expenseModel.map( {$0.price ?? 0} )
+        return prices.reduce(0){ $0 + $1 }
+    }
 }
