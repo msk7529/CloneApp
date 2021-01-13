@@ -26,7 +26,13 @@ extension SelectIncomeCategoryViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let _ = collectionView.cellForItem(at: indexPath) as? IncomeCategoryCollectionViewCell {
+        if let cell = collectionView.cellForItem(at: indexPath) as? IncomeCategoryCollectionViewCell {
+            guard let dataModel = dataModel else { return }
+            
+            dataModel.category = cell.category
+            dataModel.info = self.InfoTextFiled.text
+            incomeDAO.saveHistory(dataModel)
+            
             self.closeButtonDidTap()
         }
     }

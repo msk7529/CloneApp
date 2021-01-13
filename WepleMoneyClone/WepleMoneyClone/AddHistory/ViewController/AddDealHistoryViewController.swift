@@ -70,7 +70,7 @@ final class AddDealHistoryViewController: UIViewController {
         return button
     }()
     
-    var dataModel: ExpenseInfoModel?
+    var dataModel: InfoModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +137,13 @@ final class AddDealHistoryViewController: UIViewController {
             dataModel?.price = Int32(moneyField.text ?? "0")
             
             selectIncomeCategoryVC.modalPresentationStyle = .fullScreen
-            selectIncomeCategoryVC.dataModel = dataModel
+            
+            let incomeInfoModel: IncomeInfoModel = IncomeInfoModel()
+            incomeInfoModel.price = dataModel?.price
+            incomeInfoModel.date = dataModel?.date
+            incomeInfoModel.yearMonth = dataModel?.yearMonth
+            
+            selectIncomeCategoryVC.dataModel = incomeInfoModel
 
             self.present(selectIncomeCategoryVC, animated: false, completion: nil)
         }
@@ -155,8 +161,15 @@ final class AddDealHistoryViewController: UIViewController {
             dataModel?.price = Int32(moneyField.text ?? "0")
             
             selectExpenseCategoryVC.modalPresentationStyle = .fullScreen
-            selectExpenseCategoryVC.dataModel = dataModel
+            
+            let expenseInfoModel: ExpenseInfoModel = ExpenseInfoModel()
+            expenseInfoModel.price = dataModel?.price
+            expenseInfoModel.date = dataModel?.date
+            expenseInfoModel.yearMonth = dataModel?.yearMonth
+            
+            selectExpenseCategoryVC.dataModel = expenseInfoModel
 
+            
             self.present(selectExpenseCategoryVC, animated: false, completion: nil)
         }
     }

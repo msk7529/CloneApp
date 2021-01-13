@@ -60,11 +60,13 @@ final class SelectIncomeCategoryViewController: UIViewController {
         return incomeCategoryCollectionView
     }()
     
-    var dataModel: ExpenseInfoModel? {
+    var dataModel: IncomeInfoModel? {
         didSet {
             moneyLabel.text = String(dataModel?.price ?? 0) + "원"
         }
     }
+    
+    let incomeDAO: IncomeDAO = IncomeDAO()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -39,6 +39,9 @@
 		C268800325AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268800225AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift */; };
 		C268800625AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268800525AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift */; };
 		C268800925AF341F007ED34B /* IncomeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268800825AF341F007ED34B /* IncomeCategory.swift */; };
+		C268801B25AF6C27007ED34B /* IncomeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268801A25AF6C27007ED34B /* IncomeInfoModel.swift */; };
+		C268801E25AF6C76007ED34B /* IncomeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268801D25AF6C76007ED34B /* IncomeDAO.swift */; };
+		C268802125AF6FB3007ED34B /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268802025AF6FB3007ED34B /* InfoModel.swift */; };
 		C2F9D3DD25A8F9D700F6503D /* AddDealHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */; };
 		C2F9D3E025A90C4C00F6503D /* SingleTon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +81,9 @@
 		C268800225AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectIncomeCategoryViewController+UICollecionView.swift"; sourceTree = "<group>"; };
 		C268800525AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		C268800825AF341F007ED34B /* IncomeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCategory.swift; sourceTree = "<group>"; };
+		C268801A25AF6C27007ED34B /* IncomeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeInfoModel.swift; sourceTree = "<group>"; };
+		C268801D25AF6C76007ED34B /* IncomeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDAO.swift; sourceTree = "<group>"; };
+		C268802025AF6FB3007ED34B /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDealHistoryViewController.swift; sourceTree = "<group>"; };
 		C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,8 +164,11 @@
 		C2687E8A25ACF559007ED34B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C268802025AF6FB3007ED34B /* InfoModel.swift */,
 				C2687E8B25ACF5A7007ED34B /* ExpenseInfoModel.swift */,
+				C268801A25AF6C27007ED34B /* IncomeInfoModel.swift */,
 				C2687E8F25ACFF83007ED34B /* ExpenseDAO.swift */,
+				C268801D25AF6C76007ED34B /* IncomeDAO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -293,7 +302,9 @@
 				C2687E7825ACD894007ED34B /* ExpenseCategory.swift in Sources */,
 				C268800325AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift in Sources */,
 				C23DE41C259F8973003E30B7 /* DayCollectionViewCell.swift in Sources */,
+				C268801B25AF6C27007ED34B /* IncomeInfoModel.swift in Sources */,
 				C268800925AF341F007ED34B /* IncomeCategory.swift in Sources */,
+				C268801E25AF6C76007ED34B /* IncomeDAO.swift in Sources */,
 				C268800025AF30BD007ED34B /* SelectIncomeCategoryViewController.swift in Sources */,
 				C2687EA425AD9A26007ED34B /* MonthViewController+UITableView.swift in Sources */,
 				C23DC7D625810C73003E30B7 /* MonthViewController.swift in Sources */,
@@ -314,6 +325,7 @@
 				C23DE42925A251EE003E30B7 /* DayCollectionView.swift in Sources */,
 				C23DC7BC2581055E003E30B7 /* SceneDelegate.swift in Sources */,
 				C23DE43825A2F3C0003E30B7 /* MonthViewController+UIPageViewController.swift in Sources */,
+				C268802125AF6FB3007ED34B /* InfoModel.swift in Sources */,
 				C2F9D3E025A90C4C00F6503D /* SingleTon.swift in Sources */,
 				C2687E9025ACFF83007ED34B /* ExpenseDAO.swift in Sources */,
 			);

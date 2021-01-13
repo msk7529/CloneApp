@@ -415,7 +415,7 @@ final class MonthViewController: UIViewController {
             let year: Int = Calendar.current.component(.year, from: selectedDate)
             let month: Int = Calendar.current.component(.month, from: selectedDate)
             
-            let dataModel: ExpenseInfoModel = ExpenseInfoModel()
+            let dataModel: InfoModel = InfoModel()
             dataModel.date = selectedDate
             dataModel.yearMonth = "\(year)\(String(format: "%02d", month))"
             
