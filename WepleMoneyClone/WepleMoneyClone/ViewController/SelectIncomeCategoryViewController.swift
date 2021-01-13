@@ -1,13 +1,13 @@
 //
-//  SelectCategoryViewController.swift
+//  SelectIncomeCategoryViewController.swift
 //  WepleMoneyClone
 //
-//  Created by kakao on 2021/01/12.
+//  Created by kakao on 2021/01/13.
 //
 
 import UIKit
 
-final class SelectExpenseCategoryViewController: UIViewController {
+final class SelectIncomeCategoryViewController: UIViewController {
 
     lazy var backButton: UIButton = {
         let button: UIButton = UIButton(frame: .zero)
@@ -22,7 +22,7 @@ final class SelectExpenseCategoryViewController: UIViewController {
         let moneyLabel: UILabel = UILabel()
         moneyLabel.text = "0원"
         moneyLabel.font = UIFont.systemFont(ofSize: 23)
-        moneyLabel.textColor = UIColor(rgb: 0xFBA3CF)
+        moneyLabel.textColor = .systemGreen
         moneyLabel.textAlignment = .left
         moneyLabel.translatesAutoresizingMaskIntoConstraints = false
         return moneyLabel
@@ -49,15 +49,15 @@ final class SelectExpenseCategoryViewController: UIViewController {
         return InfoTextFiled
     }()
     
-    lazy var expenseCategoryCollectionView: UICollectionView = {
+    lazy var incomeCategoryCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let expenseCategoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        expenseCategoryCollectionView.backgroundColor = .clear
-        expenseCategoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        expenseCategoryCollectionView.isScrollEnabled = true
-        expenseCategoryCollectionView.showsHorizontalScrollIndicator = false    // 스크롤바 안보이게 처리
-        return expenseCategoryCollectionView
+        layout.scrollDirection = .vertical
+        let incomeCategoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        incomeCategoryCollectionView.backgroundColor = .clear
+        incomeCategoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        incomeCategoryCollectionView.isScrollEnabled = true
+        incomeCategoryCollectionView.showsHorizontalScrollIndicator = false    // 스크롤바 안보이게 처리
+        return incomeCategoryCollectionView
     }()
     
     var dataModel: ExpenseInfoModel? {
@@ -69,9 +69,9 @@ final class SelectExpenseCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        expenseCategoryCollectionView.delegate = self
-        expenseCategoryCollectionView.dataSource = self
-        self.expenseCategoryCollectionView.register(ExpenseCategoryCollectionViewCell.self, forCellWithReuseIdentifier: ExpenseCategoryCollectionViewCell.identifier)
+        incomeCategoryCollectionView.delegate = self
+        incomeCategoryCollectionView.dataSource = self
+        self.incomeCategoryCollectionView.register(IncomeCategoryCollectionViewCell.self, forCellWithReuseIdentifier: IncomeCategoryCollectionViewCell.identifier)
         
         makeUI()
     }
@@ -89,7 +89,7 @@ final class SelectExpenseCategoryViewController: UIViewController {
         self.view.addSubview(moneyLabel)
         self.view.addSubview(closeButton)
         self.view.addSubview(InfoTextFiled)
-        self.view.addSubview(expenseCategoryCollectionView)
+        self.view.addSubview(incomeCategoryCollectionView)
         
         backButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         backButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 15).isActive = true
@@ -105,10 +105,10 @@ final class SelectExpenseCategoryViewController: UIViewController {
         InfoTextFiled.rightAnchor.constraint(equalTo: self.closeButton.rightAnchor, constant: 0).isActive = true
         InfoTextFiled.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
-        expenseCategoryCollectionView.topAnchor.constraint(equalTo: self.InfoTextFiled.bottomAnchor, constant: 15).isActive = true
-        expenseCategoryCollectionView.leftAnchor.constraint(equalTo: InfoTextFiled.leftAnchor).isActive = true
-        expenseCategoryCollectionView.rightAnchor.constraint(equalTo: InfoTextFiled.rightAnchor).isActive = true
-        expenseCategoryCollectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: ExpenseCategoryCollectionViewCell.height * 4 + 30).isActive = true
+        incomeCategoryCollectionView.topAnchor.constraint(equalTo: self.InfoTextFiled.bottomAnchor, constant: 15).isActive = true
+        incomeCategoryCollectionView.leftAnchor.constraint(equalTo: InfoTextFiled.leftAnchor).isActive = true
+        incomeCategoryCollectionView.rightAnchor.constraint(equalTo: InfoTextFiled.rightAnchor).isActive = true
+        incomeCategoryCollectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: ExpenseCategoryCollectionViewCell.height * CGFloat(IncomeCategory.category.count) + 30).isActive = true
     }
     
     @objc private func backButtonDidTap() {
@@ -122,7 +122,7 @@ final class SelectExpenseCategoryViewController: UIViewController {
         self.dismiss(animated: false)
     }
     
-    @objc private func closeButtonDidTap() {
+    @objc func closeButtonDidTap() {
         var currentVC: UIViewController? = self     // 현재 뷰컨
         
         while(currentVC != nil) {
@@ -135,4 +135,7 @@ final class SelectExpenseCategoryViewController: UIViewController {
             currentVC = tmpVC
         }
     }
+    
+
+
 }

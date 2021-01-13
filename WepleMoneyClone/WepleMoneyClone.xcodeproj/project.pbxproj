@@ -35,6 +35,10 @@
 		C2687E9625AD7740007ED34B /* DailyHistoryInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2687E9525AD7740007ED34B /* DailyHistoryInfoTableView.swift */; };
 		C2687E9C25AD78A5007ED34B /* DailyHistoryInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2687E9B25AD78A5007ED34B /* DailyHistoryInfoTableViewCell.swift */; };
 		C2687EA425AD9A26007ED34B /* MonthViewController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2687EA325AD9A26007ED34B /* MonthViewController+UITableView.swift */; };
+		C268800025AF30BD007ED34B /* SelectIncomeCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2687FFF25AF30BD007ED34B /* SelectIncomeCategoryViewController.swift */; };
+		C268800325AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268800225AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift */; };
+		C268800625AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268800525AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift */; };
+		C268800925AF341F007ED34B /* IncomeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268800825AF341F007ED34B /* IncomeCategory.swift */; };
 		C2F9D3DD25A8F9D700F6503D /* AddDealHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */; };
 		C2F9D3E025A90C4C00F6503D /* SingleTon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +74,10 @@
 		C2687E9525AD7740007ED34B /* DailyHistoryInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHistoryInfoTableView.swift; sourceTree = "<group>"; };
 		C2687E9B25AD78A5007ED34B /* DailyHistoryInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHistoryInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C2687EA325AD9A26007ED34B /* MonthViewController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonthViewController+UITableView.swift"; sourceTree = "<group>"; };
+		C2687FFF25AF30BD007ED34B /* SelectIncomeCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIncomeCategoryViewController.swift; sourceTree = "<group>"; };
+		C268800225AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectIncomeCategoryViewController+UICollecionView.swift"; sourceTree = "<group>"; };
+		C268800525AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		C268800825AF341F007ED34B /* IncomeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCategory.swift; sourceTree = "<group>"; };
 		C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDealHistoryViewController.swift; sourceTree = "<group>"; };
 		C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +151,10 @@
 				C2687E7E25ACDEA1007ED34B /* ExpenseCategoryCollectionViewCell.swift */,
 				C2687E8125ACEAF5007ED34B /* SelectExpensePaymentViewController.swift */,
 				C2687E7725ACD894007ED34B /* ExpenseCategory.swift */,
+				C2687FFF25AF30BD007ED34B /* SelectIncomeCategoryViewController.swift */,
+				C268800225AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift */,
+				C268800525AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift */,
+				C268800825AF341F007ED34B /* IncomeCategory.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -239,7 +251,10 @@
 				C2F9D3DD25A8F9D700F6503D /* AddDealHistoryViewController.swift in Sources */,
 				C2687E7F25ACDEA1007ED34B /* ExpenseCategoryCollectionViewCell.swift in Sources */,
 				C2687E7825ACD894007ED34B /* ExpenseCategory.swift in Sources */,
+				C268800325AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift in Sources */,
 				C23DE41C259F8973003E30B7 /* DayCollectionViewCell.swift in Sources */,
+				C268800925AF341F007ED34B /* IncomeCategory.swift in Sources */,
+				C268800025AF30BD007ED34B /* SelectIncomeCategoryViewController.swift in Sources */,
 				C2687EA425AD9A26007ED34B /* MonthViewController+UITableView.swift in Sources */,
 				C23DC7D625810C73003E30B7 /* MonthViewController.swift in Sources */,
 				C2687E9C25AD78A5007ED34B /* DailyHistoryInfoTableViewCell.swift in Sources */,
@@ -250,6 +265,7 @@
 				C23DE43B25A2F58A003E30B7 /* MonthCalendarViewController+UICollectionView.swift in Sources */,
 				C23DC7C42581055E003E30B7 /* MoneyHistory.xcdatamodeld in Sources */,
 				C23DC7DD25810C8A003E30B7 /* DayViewController.swift in Sources */,
+				C268800625AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift in Sources */,
 				C23DE42F25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift in Sources */,
 				C2687E8C25ACF5A7007ED34B /* ExpenseInfoModel.swift in Sources */,
 				C23DE43525A2F33D003E30B7 /* MonthViewController+UICollectionView.swift in Sources */,

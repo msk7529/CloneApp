@@ -56,6 +56,21 @@
             </objects>
             <point key="canvasLocation" x="3321" y="-378"/>
         </scene>
+        <!--Select Income Category View Controller-->
+        <scene sceneID="Lga-hh-omd">
+            <objects>
+                <viewController storyboardIdentifier="SelectIncomeCategoryViewController" id="MIj-Ac-hPx" customClass="SelectIncomeCategoryViewController" customModule="WepleMoneyClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dqF-wG-F30">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="sK0-51-uXJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uct-3Y-HBS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4099" y="9"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="BfO-lJ-snl">
             <objects>
@@ -125,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x21-Bd-VR2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4088" y="-378"/>
+            <point key="canvasLocation" x="4097" y="-638"/>
         </scene>
         <!--Select Expense Payment View Controller-->
         <scene sceneID="O3X-t0-SVt">
@@ -140,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yT7-In-gwm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4865" y="-367"/>
+            <point key="canvasLocation" x="4881" y="-638"/>
         </scene>
     </scenes>
     <resources>

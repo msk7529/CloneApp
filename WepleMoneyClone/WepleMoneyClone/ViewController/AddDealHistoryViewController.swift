@@ -126,7 +126,21 @@ final class AddDealHistoryViewController: UIViewController {
     }
     
     @objc private func incomeButtonDidTap() {
-        
+        if let selectIncomeCategoryVC = self.storyboard?.instantiateViewController(identifier: "SelectIncomeCategoryViewController") as? SelectIncomeCategoryViewController {
+            let transition: CATransition = CATransition()
+            transition.type = CATransitionType.push
+            transition.duration = 0.3
+            transition.subtype = CATransitionSubtype.fromRight
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            view.window!.layer.add(transition, forKey: kCATransition)
+                        
+            dataModel?.price = Int32(moneyField.text ?? "0")
+            
+            selectIncomeCategoryVC.modalPresentationStyle = .fullScreen
+            selectIncomeCategoryVC.dataModel = dataModel
+
+            self.present(selectIncomeCategoryVC, animated: false, completion: nil)
+        }
     }
     
     @objc private func expenseButtonDidTap() {
