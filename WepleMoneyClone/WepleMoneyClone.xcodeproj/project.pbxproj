@@ -112,8 +112,19 @@
 		C23DC7B82581055E003E30B7 /* WepleMoneyClone */ = {
 			isa = PBXGroup;
 			children = (
-				C23DE419259F7FFD003E30B7 /* Recources */,
-				C23DC7D425810C3E003E30B7 /* ViewController */,
+				C268800C25AF6960007ED34B /* MonthlyView(Main) */,
+				C2687E9525AD7740007ED34B /* DailyHistoryInfoTableView.swift */,
+				C2687E9B25AD78A5007ED34B /* DailyHistoryInfoTableViewCell.swift */,
+				C23DE42825A251EE003E30B7 /* DayCollectionView.swift */,
+				C23DE41B259F8973003E30B7 /* DayCollectionViewCell.swift */,
+				C23DE42B25A2555F003E30B7 /* MonthCalendarCollectionView.swift */,
+				C23DE42E25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift */,
+				C23DE419259F7FFD003E30B7 /* AddHistory */,
+				C2687E7E25ACDEA1007ED34B /* ExpenseCategoryCollectionViewCell.swift */,
+				C268800525AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift */,
+				C23DC7D425810C3E003E30B7 /* WeeklyView */,
+				C268801725AF6A7F007ED34B /* DailyView */,
+				C268800B25AF671F007ED34B /* Category */,
 				C2687E8A25ACF559007ED34B /* Model */,
 				C23DC7B92581055E003E30B7 /* AppDelegate.swift */,
 				C23DC7BB2581055E003E30B7 /* SceneDelegate.swift */,
@@ -128,42 +139,20 @@
 			path = WepleMoneyClone;
 			sourceTree = "<group>";
 		};
-		C23DC7D425810C3E003E30B7 /* ViewController */ = {
+		C23DC7D425810C3E003E30B7 /* WeeklyView */ = {
 			isa = PBXGroup;
 			children = (
-				C23DC7D525810C73003E30B7 /* MonthViewController.swift */,
-				C23DE43725A2F3C0003E30B7 /* MonthViewController+UIPageViewController.swift */,
-				C23DE43425A2F33D003E30B7 /* MonthViewController+UICollectionView.swift */,
-				C2687EA325AD9A26007ED34B /* MonthViewController+UITableView.swift */,
-				C2687E9525AD7740007ED34B /* DailyHistoryInfoTableView.swift */,
-				C2687E9B25AD78A5007ED34B /* DailyHistoryInfoTableViewCell.swift */,
-				C23DE42825A251EE003E30B7 /* DayCollectionView.swift */,
-				C23DE41B259F8973003E30B7 /* DayCollectionViewCell.swift */,
-				C23DE43125A28AF5003E30B7 /* MonthCalendarViewController.swift */,
-				C23DE43A25A2F58A003E30B7 /* MonthCalendarViewController+UICollectionView.swift */,
-				C23DE42B25A2555F003E30B7 /* MonthCalendarCollectionView.swift */,
-				C23DE42E25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift */,
 				C23DC7D925810C80003E30B7 /* WeekViewController.swift */,
-				C23DC7DC25810C8A003E30B7 /* DayViewController.swift */,
-				C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */,
-				C2687E7225ACBD39007ED34B /* SelectExpenseCategoryViewController.swift */,
-				C2687E7A25ACDA9C007ED34B /* SelectExpenseCategoryViewController+UICollectionView.swift */,
-				C2687E7E25ACDEA1007ED34B /* ExpenseCategoryCollectionViewCell.swift */,
-				C2687E8125ACEAF5007ED34B /* SelectExpensePaymentViewController.swift */,
-				C2687E7725ACD894007ED34B /* ExpenseCategory.swift */,
-				C2687FFF25AF30BD007ED34B /* SelectIncomeCategoryViewController.swift */,
-				C268800225AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift */,
-				C268800525AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift */,
-				C268800825AF341F007ED34B /* IncomeCategory.swift */,
 			);
-			path = ViewController;
+			path = WeeklyView;
 			sourceTree = "<group>";
 		};
-		C23DE419259F7FFD003E30B7 /* Recources */ = {
+		C23DE419259F7FFD003E30B7 /* AddHistory */ = {
 			isa = PBXGroup;
 			children = (
+				C268801525AF6A37007ED34B /* ViewController */,
 			);
-			path = Recources;
+			path = AddHistory;
 			sourceTree = "<group>";
 		};
 		C2687E8A25ACF559007ED34B /* Model */ = {
@@ -173,6 +162,57 @@
 				C2687E8F25ACFF83007ED34B /* ExpenseDAO.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C268800B25AF671F007ED34B /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				C2687E7725ACD894007ED34B /* ExpenseCategory.swift */,
+				C268800825AF341F007ED34B /* IncomeCategory.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		C268800C25AF6960007ED34B /* MonthlyView(Main) */ = {
+			isa = PBXGroup;
+			children = (
+				C268800D25AF6962007ED34B /* ViewController */,
+			);
+			path = "MonthlyView(Main)";
+			sourceTree = "<group>";
+		};
+		C268800D25AF6962007ED34B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C23DC7D525810C73003E30B7 /* MonthViewController.swift */,
+				C23DE43725A2F3C0003E30B7 /* MonthViewController+UIPageViewController.swift */,
+				C23DE43425A2F33D003E30B7 /* MonthViewController+UICollectionView.swift */,
+				C2687EA325AD9A26007ED34B /* MonthViewController+UITableView.swift */,
+				C23DE43125A28AF5003E30B7 /* MonthCalendarViewController.swift */,
+				C23DE43A25A2F58A003E30B7 /* MonthCalendarViewController+UICollectionView.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C268801525AF6A37007ED34B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */,
+				C2687E7225ACBD39007ED34B /* SelectExpenseCategoryViewController.swift */,
+				C2687E7A25ACDA9C007ED34B /* SelectExpenseCategoryViewController+UICollectionView.swift */,
+				C2687E8125ACEAF5007ED34B /* SelectExpensePaymentViewController.swift */,
+				C2687FFF25AF30BD007ED34B /* SelectIncomeCategoryViewController.swift */,
+				C268800225AF3238007ED34B /* SelectIncomeCategoryViewController+UICollecionView.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C268801725AF6A7F007ED34B /* DailyView */ = {
+			isa = PBXGroup;
+			children = (
+				C23DC7DC25810C8A003E30B7 /* DayViewController.swift */,
+			);
+			path = DailyView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
