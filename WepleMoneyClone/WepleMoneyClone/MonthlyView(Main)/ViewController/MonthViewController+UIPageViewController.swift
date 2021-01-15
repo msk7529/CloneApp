@@ -26,13 +26,15 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
                 strongSelf.tableView.reloadData()
             }
             
-            beforeCalendarVC.showMonthlyExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense in
+            beforeCalendarVC.showMonthlyIncomeExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense, totalIncome in
                 // 월간 입금/지출금액 표시
                 guard let strongSelf = self else { return }
                 
                 strongSelf.expenseMoney.text = String(totalExpense) + "원"
                 strongSelf.cashMoney.text = String(totalCashExpense) + "원"
                 strongSelf.cardMoney.text = String(totalCardExpense) + "원"
+                strongSelf.incomeMoney.text = String(totalIncome) + "원"
+                strongSelf.balanceMoney.text = String(totalIncome - totalExpense) + "원"
             }
 
             return beforeCalendarVC
@@ -59,13 +61,15 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
                 strongSelf.tableView.reloadData()
             }
             
-            afterCalendarVC.showMonthlyExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense in
+            afterCalendarVC.showMonthlyIncomeExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense, totalIncome in
                 // 월간 입금/지출금액 표시
                 guard let strongSelf = self else { return }
                 
                 strongSelf.expenseMoney.text = String(totalExpense) + "원"
                 strongSelf.cashMoney.text = String(totalCashExpense) + "원"
                 strongSelf.cardMoney.text = String(totalCardExpense) + "원"
+                strongSelf.incomeMoney.text = String(totalIncome) + "원"
+                strongSelf.balanceMoney.text = String(totalIncome - totalExpense) + "원"
             }
             
             return afterCalendarVC

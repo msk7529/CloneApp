@@ -26,6 +26,7 @@ final class MonthCalendarCollectionView: UICollectionView {
     }
     var currentDay: Int!
     var expenseInfoList: [ExpenseInfoModel] = []
+    var incomeInfoList: [IncomeInfoModel] = []
     
     private func makeDayArr() {
         var dateComponents: DateComponents = DateComponents()
@@ -109,5 +110,9 @@ final class MonthCalendarCollectionView: UICollectionView {
     
     func fetchOneDayExpenseInfoModel(date: Date) -> [ExpenseInfoModel] {
         return expenseInfoList.filter({ $0.date == date })
+    }
+    
+    func fetchOneDayIncomeInfoModel(date: Date) -> [IncomeInfoModel] {
+        return incomeInfoList.filter({ $0.date == date })
     }
 }

@@ -52,9 +52,15 @@ final class MonthCalendarViewController: UIViewController {
         }
     }
     
+    var incomeInfoList: [IncomeInfoModel] = [] {
+        didSet {
+            calendarView.incomeInfoList = incomeInfoList
+        }
+    }
+    
     var showDailyHistoryInfo: (([ExpenseInfoModel]) -> Void)?
     var reloadDailyHistoryInfoIfNeeded: (([ExpenseInfoModel]) -> Void)?
-    var showMonthlyExpenseMoney: ((Int32, Int32, Int32) -> Void)?
+    var showMonthlyIncomeExpenseMoney: ((Int32, Int32, Int32, Int32) -> Void)?
     
     private var expenseDAO: ExpenseDAO = ExpenseDAO()
     
@@ -86,14 +92,17 @@ final class MonthCalendarViewController: UIViewController {
             self.reloadDailyHistoryInfoIfNeeded?(selectedDateFetchResult)
         }
         
-        // 월간 지출금액을 계산하여 MonthVC에 넘긴다.
-        var prices: [Int32] = self.expenseInfoList.map { $0.price ?? 0 }
-        let totalExpense: Int32 = prices.reduce(0, { $0 + $1 })
-        prices = self.expenseInfoList.filter { $0.payment == "현금" }.map { $0.price ?? 0 }
-        let totalCashExpense: Int32 = prices.reduce(0, { $0 + $1 })
+        // 월간 지출/수입금액을 계산하여 MonthVC에 넘긴다.
+        var expensePrices: [Int32] = self.expenseInfoList.map { $0.price ?? 0 }
+        let totalExpense: Int32 = expensePrices.reduce(0, { $0 + $1 })
+        expensePrices = self.expenseInfoList.filter { $0.payment == "현금" }.map { $0.price ?? 0 }
+        let totalCashExpense: Int32 = expensePrices.reduce(0, { $0 + $1 })
         let totalCardExpense: Int32 = totalExpense - totalCashExpense
-        self.showMonthlyExpenseMoney?(totalExpense, totalCashExpense, totalCardExpense)
         
+        let incomePrices: [Int32] = self.incomeInfoList.map { $0.price ?? 0 }
+        let totalIncome: Int32 = incomePrices.reduce(0, { $0 + $1 })
+        
+        self.showMonthlyIncomeExpenseMoney?(totalExpense, totalCashExpense, totalCardExpense, totalIncome)
     }
     
     deinit {

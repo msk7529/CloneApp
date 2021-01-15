@@ -203,6 +203,7 @@ final class MonthViewController: UIViewController {
     private var todayDay: Int!
     
     var expenseDAO: ExpenseDAO = ExpenseDAO()
+    var incomeDAO: IncomeDAO = IncomeDAO()
     var calendarRootViewHeightConstraint: NSLayoutConstraint!   // calendarRootView의 높이조정을 위해 선언
     
     // MARK: - LifeCycle
@@ -230,6 +231,7 @@ final class MonthViewController: UIViewController {
         monthCalendarVC.currentMonth = todayMonth
         monthCalendarVC.currentDay = todayDay
         monthCalendarVC.expenseInfoList = expenseDAO.fetch(yearMonth: "\(String(describing: todayYear!))\(String(format: "%02d", todayMonth))")
+        monthCalendarVC.incomeInfoList = incomeDAO.fetch(yearMonth: "\(String(describing: todayYear!))\(String(format: "%02d", todayMonth))")
         
         monthCalendarVC.showDailyHistoryInfo = { [weak self] expenseInfoModel in
             // 캘린더뷰의 날짜를 터치했을때 실행되는 클로저. 테이블뷰를 갱신한다.
@@ -247,13 +249,15 @@ final class MonthViewController: UIViewController {
             strongSelf.tableView.reloadData()
         }
         
-        monthCalendarVC.showMonthlyExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense in
-            // 월간 입금/지출금액 표시
+        monthCalendarVC.showMonthlyIncomeExpenseMoney = { [weak self] totalExpense, totalCashExpense, totalCardExpense, totalIncome in
+            // 월간 입금/지출금액, 현금잔액 표시
             guard let strongSelf = self else { return }
             
             strongSelf.expenseMoney.text = String(totalExpense) + "원"
             strongSelf.cashMoney.text = String(totalCashExpense) + "원"
             strongSelf.cardMoney.text = String(totalCardExpense) + "원"
+            strongSelf.incomeMoney.text = String(totalIncome) + "원"
+            strongSelf.balanceMoney.text = String(totalIncome - totalExpense) + "원"
         }
         
         calendarPageViewController.setViewControllers([monthCalendarVC], direction: .forward, animated: false, completion: nil)

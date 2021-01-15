@@ -17,6 +17,8 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
     static let height: CGFloat = 55
     static let identifier: String = "MonthCalendarCollectionViewCell"
     
+    private var incomeMoneyLabelTopConstraint: NSLayoutConstraint!
+    private var expenseMoneyLabelTopConstraint: NSLayoutConstraint!
     var currentDayString: String!
     var currentDate: Date!
     
@@ -27,6 +29,15 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         dayLabel.textAlignment = .center
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         return dayLabel
+    }()
+    
+    lazy var incomeMoneyLabel: UILabel = {
+        let incomeMoneyLabel: UILabel = UILabel(frame: .zero)
+        incomeMoneyLabel.font = UIFont.systemFont(ofSize: 10)
+        incomeMoneyLabel.textColor = .systemGreen
+        incomeMoneyLabel.textAlignment = .center
+        incomeMoneyLabel.translatesAutoresizingMaskIntoConstraints = false
+        return incomeMoneyLabel
     }()
     
     lazy var expenseMoneyLabel: UILabel = {
@@ -64,9 +75,20 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
     
     var expenseModel: [ExpenseInfoModel] = [] {
         didSet {
+            decideLabelsPosistion()
+            
             if !expenseModel.isEmpty && isCurrentMonth == true {
-                let totalPrice: Int32 = caculateTotalPrice()
+                let totalPrice: Int32 = caculateExpenseTotalPrice()
                 expenseMoneyLabel.text = String(totalPrice)
+            }
+        }
+    }
+    
+    var incomeModel: [IncomeInfoModel] = [] {
+        didSet {
+            if !incomeModel.isEmpty && isCurrentMonth == true {
+                let totalPrice: Int32 = caculateIncomeTotalPrice()
+                incomeMoneyLabel.text = totalPrice.description
             }
         }
     }
@@ -113,24 +135,50 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
         self.dayLabel.textColor = .black
         self.expenseMoneyLabel.textColor = UIColor(rgb: 0xF68DA9)
         self.expenseMoneyLabel.text = ""
+        self.incomeMoneyLabel.textColor = .systemGreen
+        self.incomeMoneyLabel.text = ""
     }
     
     private func makeUI() {
         self.contentView.addSubview(dayLabel)
+        
         self.contentView.addSubview(expenseMoneyLabel)
+        self.contentView.addSubview(incomeMoneyLabel)
         
         dayLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         dayLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
         dayLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
         dayLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        expenseMoneyLabel.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 5).isActive = true
+        incomeMoneyLabelTopConstraint = incomeMoneyLabel.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 2)
+        incomeMoneyLabelTopConstraint.isActive = true
+        incomeMoneyLabel.leftAnchor.constraint(equalTo: self.dayLabel.leftAnchor).isActive = true
+        incomeMoneyLabel.rightAnchor.constraint(equalTo: self.dayLabel.rightAnchor).isActive = true
+        
+        expenseMoneyLabelTopConstraint = expenseMoneyLabel.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 15)
+        expenseMoneyLabelTopConstraint.isActive = true
         expenseMoneyLabel.leftAnchor.constraint(equalTo: self.dayLabel.leftAnchor).isActive = true
         expenseMoneyLabel.rightAnchor.constraint(equalTo: self.dayLabel.rightAnchor).isActive = true
     }
     
-    private func caculateTotalPrice() -> Int32 {
+    private func decideLabelsPosistion() {
+        if expenseModel.isEmpty {
+            incomeMoneyLabelTopConstraint.constant = 5
+        } else if incomeModel.isEmpty {
+            expenseMoneyLabelTopConstraint.constant = 5
+        } else {
+            incomeMoneyLabelTopConstraint.constant = 2
+            expenseMoneyLabelTopConstraint.constant = 15
+        }
+    }
+    
+    private func caculateExpenseTotalPrice() -> Int32 {
         let prices: [Int32] = self.expenseModel.map( {$0.price ?? 0} )
+        return prices.reduce(0){ $0 + $1 }
+    }
+    
+    private func caculateIncomeTotalPrice() -> Int32 {
+        let prices: [Int32] = self.incomeModel.map( {$0.price ?? 0} )
         return prices.reduce(0){ $0 + $1 }
     }
 }

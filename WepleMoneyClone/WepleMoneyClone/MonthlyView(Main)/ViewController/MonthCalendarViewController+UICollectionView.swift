@@ -53,6 +53,7 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
                 }
             }
             
+            cell.incomeModel = collectionView.fetchOneDayIncomeInfoModel(date: currentDate)
             cell.expenseModel = collectionView.fetchOneDayExpenseInfoModel(date: currentDate)
             
             return cell
