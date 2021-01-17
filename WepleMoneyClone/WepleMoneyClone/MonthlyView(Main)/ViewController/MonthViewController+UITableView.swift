@@ -12,7 +12,7 @@ extension MonthViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let tableView = tableView as? DailyHistoryInfoTableView else { return 0 }
         
-        return tableView.expenseInfo.count
+        return tableView.expenseInfo.count + tableView.incomeInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -22,7 +22,16 @@ extension MonthViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.selectionStyle = .none
-            cell.expenseInfo = tableView.expenseInfo[indexPath.row]
+            
+            if tableView.incomeInfo.isEmpty == true {
+                cell.expenseInfo = tableView.expenseInfo[indexPath.row]
+            } else {
+                if indexPath.row < tableView.incomeInfo.count {
+                    cell.incomeInfo = tableView.incomeInfo[indexPath.row]
+                } else {
+                    cell.expenseInfo = tableView.expenseInfo[tableView.expenseInfo.count - indexPath.row]
+                }
+            }
             
             return cell
         }

@@ -33,6 +33,8 @@ extension SelectIncomeCategoryViewController: UICollectionViewDataSource, UIColl
             dataModel.info = self.InfoTextFiled.text
             incomeDAO.saveHistory(dataModel)
             
+            NotificationCenter.default.post(name: NSNotification.Name("AddHistoryNotification"), object: nil)
+            
             self.closeButtonDidTap()
         }
     }

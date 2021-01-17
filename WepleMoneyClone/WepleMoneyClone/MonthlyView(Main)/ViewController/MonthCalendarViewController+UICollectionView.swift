@@ -65,7 +65,7 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
         guard let collectionView = collectionView as? MonthCalendarCollectionView else { return }
 
         if let cell = collectionView.cellForItem(at: indexPath) as? MonthCalendarCollectionViewCell {
-            self.showDailyHistoryInfo?(cell.expenseModel)
+            self.showDailyHistoryInfo?(cell.expenseModel, cell.incomeModel)
         }
         
         collectionView.reloadData()

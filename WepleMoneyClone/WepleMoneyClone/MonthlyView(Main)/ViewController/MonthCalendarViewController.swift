@@ -58,11 +58,12 @@ final class MonthCalendarViewController: UIViewController {
         }
     }
     
-    var showDailyHistoryInfo: (([ExpenseInfoModel]) -> Void)?
-    var reloadDailyHistoryInfoIfNeeded: (([ExpenseInfoModel]) -> Void)?
+    var showDailyHistoryInfo: (([ExpenseInfoModel], [IncomeInfoModel]) -> Void)?
+    var reloadDailyHistoryInfoIfNeeded: (([ExpenseInfoModel], [IncomeInfoModel]) -> Void)?
     var showMonthlyIncomeExpenseMoney: ((Int32, Int32, Int32, Int32) -> Void)?
     
     private var expenseDAO: ExpenseDAO = ExpenseDAO()
+    private var incomeDAO: IncomeDAO = IncomeDAO()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,8 +89,9 @@ final class MonthCalendarViewController: UIViewController {
         let selectedDate: Date? = SingleTon.shared.selectedDate
         if selectedDate != nil {
             // 앱 첫 실행후, 오늘날짜에 해당하는 테이블뷰가 노출되지 않는 문제해결을 위한 처리
-            let selectedDateFetchResult: [ExpenseInfoModel] = expenseDAO.fetchAtCertainDate(date: selectedDate!)
-            self.reloadDailyHistoryInfoIfNeeded?(selectedDateFetchResult)
+            let selectedDateFetchExpenseInfoResult: [ExpenseInfoModel] = expenseDAO.fetchAtCertainDate(date: selectedDate!)
+            let selectedDateFetchIncomeInfoResult: [IncomeInfoModel] = incomeDAO.fetchAtCertainDate(date: selectedDate!)
+            self.reloadDailyHistoryInfoIfNeeded?(selectedDateFetchExpenseInfoResult, selectedDateFetchIncomeInfoResult)
         }
         
         // 월간 지출/수입금액을 계산하여 MonthVC에 넘긴다.
@@ -116,10 +118,13 @@ final class MonthCalendarViewController: UIViewController {
         print("###didReceiveAddHistoryNotification###")
         print("\(currentYear!)년 \(currentMonth!)월")
         
-        let fetchResult: [ExpenseInfoModel] = expenseDAO.fetch(yearMonth: "\(String(describing: currentYear!))\(String(format: "%02d", currentMonth!))")
-        self.expenseInfoList = fetchResult
+        let fetchExpenseInfoResult: [ExpenseInfoModel] = expenseDAO.fetch(yearMonth: "\(String(describing: currentYear!))\(String(format: "%02d", currentMonth!))")
+        let fetchIncomeInfoResult: [IncomeInfoModel] = incomeDAO.fetch(yearMonth: "\(String(describing: currentYear!))\(String(format: "%02d", currentMonth!))")
+        self.expenseInfoList = fetchExpenseInfoResult
+        self.incomeInfoList = fetchIncomeInfoResult
         
-        let filterSelectedDayFetchResult: [ExpenseInfoModel] = fetchResult.filter { $0.date == SingleTon.shared.selectedDate }
-        self.reloadDailyHistoryInfoIfNeeded?(filterSelectedDayFetchResult)
+        let filterSelectedDayFetchExpenseInfoResult: [ExpenseInfoModel] = fetchExpenseInfoResult.filter { $0.date == SingleTon.shared.selectedDate }
+        let filterSelectedDayFetchIncomeInfoResult: [IncomeInfoModel] = fetchIncomeInfoResult.filter { $0.date == SingleTon.shared.selectedDate }
+        self.reloadDailyHistoryInfoIfNeeded?(filterSelectedDayFetchExpenseInfoResult, filterSelectedDayFetchIncomeInfoResult)
     }
 }

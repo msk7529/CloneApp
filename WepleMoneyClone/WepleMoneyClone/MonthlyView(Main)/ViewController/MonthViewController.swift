@@ -233,19 +233,21 @@ final class MonthViewController: UIViewController {
         monthCalendarVC.expenseInfoList = expenseDAO.fetch(yearMonth: "\(String(describing: todayYear!))\(String(format: "%02d", todayMonth))")
         monthCalendarVC.incomeInfoList = incomeDAO.fetch(yearMonth: "\(String(describing: todayYear!))\(String(format: "%02d", todayMonth))")
         
-        monthCalendarVC.showDailyHistoryInfo = { [weak self] expenseInfoModel in
+        monthCalendarVC.showDailyHistoryInfo = { [weak self] expenseInfoModel, incomeInfoModel in
             // 캘린더뷰의 날짜를 터치했을때 실행되는 클로저. 테이블뷰를 갱신한다.
             guard let strongSelf = self else { return }
             
             strongSelf.tableView.expenseInfo = expenseInfoModel
+            strongSelf.tableView.incomeInfo = incomeInfoModel
             strongSelf.tableView.reloadData()
         }
         
-        monthCalendarVC.reloadDailyHistoryInfoIfNeeded = { [weak self] expenseInfoModel in
+        monthCalendarVC.reloadDailyHistoryInfoIfNeeded = { [weak self] expenseInfoModel, incomeInfoModel in
             // 입금/지출내역을 등록한 뒤 실행되는 클로저. 테이블뷰를 갱신한다.
             guard let strongSelf = self else { return }
             
             strongSelf.tableView.expenseInfo = expenseInfoModel
+            strongSelf.tableView.incomeInfo = incomeInfoModel
             strongSelf.tableView.reloadData()
         }
         

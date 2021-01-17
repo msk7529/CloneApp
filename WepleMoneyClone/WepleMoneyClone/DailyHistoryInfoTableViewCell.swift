@@ -36,6 +36,15 @@ final class DailyHistoryInfoTableViewCell: UITableViewCell {
         didSet {
             categoryLabel.text = expenseInfo?.category ?? "카테고리오류"
             priceLabel.text = String(expenseInfo?.price ?? 0) + "원"
+            priceLabel.textColor = UIColor(rgb: 0xE6787B)
+        }
+    }
+    
+    var incomeInfo: IncomeInfoModel? {
+        didSet {
+            categoryLabel.text = incomeInfo?.category ?? "카테고리오류"
+            priceLabel.text = String(incomeInfo?.price ?? 0) + "원"
+            priceLabel.textColor = UIColor(rgb: 0x47A645)
         }
     }
     

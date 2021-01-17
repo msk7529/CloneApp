@@ -10,4 +10,5 @@ import UIKit
 
 final class DailyHistoryInfoTableView: UITableView {
     var expenseInfo: [ExpenseInfoModel] = []
+    var incomeInfo: [IncomeInfoModel] = []
 }
