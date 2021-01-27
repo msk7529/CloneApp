@@ -202,6 +202,9 @@ final class MonthViewController: UIViewController {
     private var todayMonth: Int!
     private var todayDay: Int!
     
+    var currentYear: Int!
+    var currentMonth: Int!
+    
     var expenseDAO: ExpenseDAO = ExpenseDAO()
     var incomeDAO: IncomeDAO = IncomeDAO()
     var calendarRootViewHeightConstraint: NSLayoutConstraint!   // calendarRootView의 높이조정을 위해 선언
@@ -215,8 +218,9 @@ final class MonthViewController: UIViewController {
         todayMonth = Calendar.current.component(.month, from: today)
         todayYear = Calendar.current.component(.year, from: today)
         
-        setNavigation()
-        
+        currentYear = todayYear
+        currentMonth = todayMonth
+                
         self.dayCollecionView.delegate = self
         self.dayCollecionView.dataSource = self
         self.dayCollecionView.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
@@ -265,6 +269,10 @@ final class MonthViewController: UIViewController {
         calendarPageViewController.setViewControllers([monthCalendarVC], direction: .forward, animated: false, completion: nil)
         
         makeUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setNavigation(currentYear: currentYear, currentMonth: currentMonth)
     }
     
     // MARK: - fuction
@@ -368,10 +376,11 @@ final class MonthViewController: UIViewController {
         plusButton.rightAnchor.constraint(equalTo: self.expenseMoney.rightAnchor).isActive = true
     }
     
-    private func setNavigation() {
+    private func setNavigation(currentYear: Int, currentMonth: Int) {
         let textAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         
-        self.navigationItem.title = "\(String(describing: todayMonth!))월"
+        setNavigationTitle(currentYear: currentYear, currentMonth: currentMonth)
+        
         self.navigationController?.navigationBar.barTintColor = UIColor(rgb: 0x79BDB3)
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes

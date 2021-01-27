@@ -42,4 +42,15 @@ extension MonthViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return DailyHistoryInfoTableViewCell.height
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let ReceiptDetailVC = self.storyboard?.instantiateViewController(identifier: "ReceiptDetailViewController") as? ReceiptDetailViewController {
+            if let cell = tableView.cellForRow(at: indexPath) as? DailyHistoryInfoTableViewCell {
+                ReceiptDetailVC.expenseInfo = cell.expenseInfo
+                ReceiptDetailVC.incomeInfo = cell.incomeInfo
+                
+                self.navigationController?.pushViewController(ReceiptDetailVC, animated: true)
+            }
+        }
+    }
 }

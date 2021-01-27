@@ -90,6 +90,9 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
                     print("Error occured in setNavigationTitle")
                     return
                 }
+                
+                self.currentYear = year
+                self.currentMonth = month
                 setNavigationTitle(currentYear: year, currentMonth: month)
             }
         }
