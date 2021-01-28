@@ -104,13 +104,10 @@ final class MonthCalendarCollectionViewCell: UICollectionViewCell {
                 self.layer.shadowRadius = 30
                 self.layer.shadowOpacity = 0.2
                 
-                if isCurrentMonth == true {
-                    SingleTon.shared.selectedDate = currentDate
-                } else {
+                if isCurrentMonth == false {
                     dayLabel.textColor = .lightGray
                 }
-            } else {
-                isToday = isToday == true ? true : false
+                SingleTon.shared.selectedDate = currentDate
             }
         }
     }

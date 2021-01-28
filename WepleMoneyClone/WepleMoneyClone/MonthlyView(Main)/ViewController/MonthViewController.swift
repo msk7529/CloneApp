@@ -266,6 +266,32 @@ final class MonthViewController: UIViewController {
             strongSelf.balanceMoney.text = String(totalIncome - totalExpense) + "원"
         }
         
+        monthCalendarVC.goPreviousPage = { [weak self] targetYear, targetMonth in
+            guard let strongSelf = self else { return }
+            
+            let expenseInfoModel: [ExpenseInfoModel] = strongSelf.expenseDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+            let incomeInfoModel: [IncomeInfoModel] = strongSelf.incomeDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+            
+            strongSelf.goToPreviousPage()
+            strongSelf.setNavigation(currentYear: targetYear, currentMonth: targetMonth)
+            strongSelf.tableView.expenseInfo = expenseInfoModel
+            strongSelf.tableView.incomeInfo = incomeInfoModel
+            strongSelf.tableView.reloadData()
+        }
+        
+        monthCalendarVC.goNextPage = { [weak self] targetYear, targetMonth in
+            guard let strongSelf = self else { return }
+            
+            let expenseInfoModel: [ExpenseInfoModel] = strongSelf.expenseDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+            let incomeInfoModel: [IncomeInfoModel] = strongSelf.incomeDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+            
+            strongSelf.goToNextPage()
+            strongSelf.setNavigation(currentYear: targetYear, currentMonth: targetMonth)
+            strongSelf.tableView.expenseInfo = expenseInfoModel
+            strongSelf.tableView.incomeInfo = incomeInfoModel
+            strongSelf.tableView.reloadData()
+        }
+        
         calendarPageViewController.setViewControllers([monthCalendarVC], direction: .forward, animated: false, completion: nil)
         
         makeUI()
@@ -273,6 +299,8 @@ final class MonthViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setNavigation(currentYear: currentYear, currentMonth: currentMonth)
+        
+        self.view.backgroundColor = .systemBackground
     }
     
     // MARK: - fuction
@@ -376,7 +404,7 @@ final class MonthViewController: UIViewController {
         plusButton.rightAnchor.constraint(equalTo: self.expenseMoney.rightAnchor).isActive = true
     }
     
-    private func setNavigation(currentYear: Int, currentMonth: Int) {
+    func setNavigation(currentYear: Int, currentMonth: Int) {
         let textAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         
         setNavigationTitle(currentYear: currentYear, currentMonth: currentMonth)

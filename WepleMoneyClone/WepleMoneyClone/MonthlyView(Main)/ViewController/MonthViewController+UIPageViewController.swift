@@ -37,6 +37,32 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
                 strongSelf.incomeMoney.text = String(totalIncome) + "원"
                 strongSelf.balanceMoney.text = String(totalIncome - totalExpense) + "원"
             }
+            
+            beforeCalendarVC.goPreviousPage = { [weak self] targetYear, targetMonth in
+                guard let strongSelf = self else { return }
+                
+                let expenseInfoModel: [ExpenseInfoModel] = strongSelf.expenseDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+                let incomeInfoModel: [IncomeInfoModel] = strongSelf.incomeDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+                
+                strongSelf.goToPreviousPage()
+                strongSelf.setNavigation(currentYear: targetYear, currentMonth: targetMonth)
+                strongSelf.tableView.expenseInfo = expenseInfoModel
+                strongSelf.tableView.incomeInfo = incomeInfoModel
+                strongSelf.tableView.reloadData()
+            }
+            
+            beforeCalendarVC.goNextPage = { [weak self] targetYear, targetMonth in
+                guard let strongSelf = self else { return }
+                
+                let expenseInfoModel: [ExpenseInfoModel] = strongSelf.expenseDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+                let incomeInfoModel: [IncomeInfoModel] = strongSelf.incomeDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+                
+                strongSelf.goToNextPage()
+                strongSelf.setNavigation(currentYear: targetYear, currentMonth: targetMonth)
+                strongSelf.tableView.expenseInfo = expenseInfoModel
+                strongSelf.tableView.incomeInfo = incomeInfoModel
+                strongSelf.tableView.reloadData()
+            }
 
             return beforeCalendarVC
         }
@@ -74,6 +100,32 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
                 strongSelf.balanceMoney.text = String(totalIncome - totalExpense) + "원"
             }
             
+            afterCalendarVC.goPreviousPage = { [weak self] targetYear, targetMonth in
+                guard let strongSelf = self else { return }
+                
+                let expenseInfoModel: [ExpenseInfoModel] = strongSelf.expenseDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+                let incomeInfoModel: [IncomeInfoModel] = strongSelf.incomeDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+                
+                strongSelf.goToPreviousPage()
+                strongSelf.setNavigation(currentYear: targetYear, currentMonth: targetMonth)
+                strongSelf.tableView.expenseInfo = expenseInfoModel
+                strongSelf.tableView.incomeInfo = incomeInfoModel
+                strongSelf.tableView.reloadData()
+            }
+            
+            afterCalendarVC.goNextPage = { [weak self] targetYear, targetMonth in
+                guard let strongSelf = self else { return }
+                
+                let expenseInfoModel: [ExpenseInfoModel] = strongSelf.expenseDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+                let incomeInfoModel: [IncomeInfoModel] = strongSelf.incomeDAO.fetchAtCertainDate(date: SingleTon.shared.selectedDate ?? Date())
+                
+                strongSelf.goToNextPage()
+                strongSelf.setNavigation(currentYear: targetYear, currentMonth: targetMonth)
+                strongSelf.tableView.expenseInfo = expenseInfoModel
+                strongSelf.tableView.incomeInfo = incomeInfoModel
+                strongSelf.tableView.reloadData()
+            }
+            
             return afterCalendarVC
         }
         return nil
@@ -104,6 +156,24 @@ extension MonthViewController: UIPageViewControllerDelegate, UIPageViewControlle
         let delay: Double = 0.5
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {
             pageViewController.view.isUserInteractionEnabled = true
+        }
+    }
+    
+    func goToNextPage() {
+        guard let currentVC = self.monthCalendarViewControllers.first else { return }
+        
+        if let nextVC = self.calendarPageViewController.dataSource?.pageViewController(self.calendarPageViewController, viewControllerAfter: currentVC) as? MonthCalendarViewController {
+            self.calendarPageViewController.setViewControllers([nextVC], direction: .forward, animated: true, completion: nil)
+            calendarRootViewHeightConstraint.constant = MonthCalendarCollectionViewCell.height * CGFloat(nextVC.calendarView.numOfRow)
+        }
+    }
+    
+    func goToPreviousPage() {
+        guard let currentVC = self.monthCalendarViewControllers.first else { return }
+        
+        if let previousVC = self.calendarPageViewController.dataSource?.pageViewController(self.calendarPageViewController, viewControllerBefore: currentVC) as? MonthCalendarViewController {
+            self.calendarPageViewController.setViewControllers([previousVC], direction: .reverse, animated: true, completion: nil)
+            calendarRootViewHeightConstraint.constant = MonthCalendarCollectionViewCell.height * CGFloat(previousVC.calendarView.numOfRow)
         }
     }
 }

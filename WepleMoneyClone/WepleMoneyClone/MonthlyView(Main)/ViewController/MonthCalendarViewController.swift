@@ -61,6 +61,8 @@ final class MonthCalendarViewController: UIViewController {
     var showDailyHistoryInfo: (([ExpenseInfoModel], [IncomeInfoModel]) -> Void)?
     var reloadDailyHistoryInfoIfNeeded: (([ExpenseInfoModel], [IncomeInfoModel]) -> Void)?
     var showMonthlyIncomeExpenseMoney: ((Int32, Int32, Int32, Int32) -> Void)?
+    var goNextPage: ((Int, Int) -> Void)?
+    var goPreviousPage: ((Int, Int) -> Void)?
     
     private var expenseDAO: ExpenseDAO = ExpenseDAO()
     private var incomeDAO: IncomeDAO = IncomeDAO()

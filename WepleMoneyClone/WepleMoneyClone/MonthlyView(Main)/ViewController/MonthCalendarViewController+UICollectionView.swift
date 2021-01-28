@@ -24,26 +24,40 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
+            let isUnActiveCell: Bool = indexPath.row < collectionView.startIndex || indexPath.row > collectionView.endIndex
+            if isUnActiveCell {
+                cell.isCurrentMonth = false     // 비활성화되는 셀
+            }
+            
             let currentDayString: String = DayCollectionView.daySringArr[indexPath.row % 7]
             cell.currentDayString = currentDayString    // 셀에 해당하는 요일
             
             let dayNum: Int = collectionView.dayArr[indexPath.row]
             let dayString: String = String(format: "%02d", dayNum)  // 셀의 날짜
-            if let todayDay = currentDay, todayDay == dayNum {
+            if let todayDay = currentDay, todayDay == dayNum && !isUnActiveCell {
                 cell.isToday = true
             } else {
                 cell.isToday = false
             }
             cell.dayLabel.text = String(dayNum)
             
-            let currentDate: Date = dateformatter.date(from: "\(currentYear!) \(currentMonth!) \(dayString)") ?? Date()
-            cell.currentDate = currentDate
-            
-            let isUnActiveCell: Bool = indexPath.row < collectionView.startIndex || indexPath.row > collectionView.endIndex     // 비활성화되는 셀
-            
-            if isUnActiveCell {
-                cell.isCurrentMonth = false
+            var currentDate: Date
+            if indexPath.row < collectionView.startIndex {
+                if currentMonth == 1 {
+                    currentDate = dateformatter.date(from: "\(currentYear! - 1) 12 \(dayString)") ?? Date()
+                } else {
+                    currentDate = dateformatter.date(from: "\(currentYear!) \(currentMonth! - 1) \(dayString)") ?? Date()
+                }
+            } else if indexPath.row > collectionView.endIndex {
+                if currentMonth == 12 {
+                    currentDate = dateformatter.date(from: "\(currentYear! + 1) 1 \(dayString)") ?? Date()
+                } else {
+                    currentDate = dateformatter.date(from: "\(currentYear!) \(currentMonth! + 1) \(dayString)") ?? Date()
+                }
+            } else {
+                currentDate = dateformatter.date(from: "\(currentYear!) \(currentMonth!) \(dayString)") ?? Date()
             }
+            cell.currentDate = currentDate
             
             if let selectedDate = SingleTon.shared.selectedDate {
                 if selectedDate == cell.currentDate && isUnActiveCell == false {
@@ -65,7 +79,23 @@ extension MonthCalendarViewController: UICollectionViewDataSource {
         guard let collectionView = collectionView as? MonthCalendarCollectionView else { return }
 
         if let cell = collectionView.cellForItem(at: indexPath) as? MonthCalendarCollectionViewCell {
-            self.showDailyHistoryInfo?(cell.expenseModel, cell.incomeModel)
+            if cell.isCurrentMonth == true {
+                self.showDailyHistoryInfo?(cell.expenseModel, cell.incomeModel)
+            } else {
+                if indexPath.row < collectionView.startIndex {
+                    if currentMonth == 1 {
+                        self.goPreviousPage?(self.currentYear! - 1, 12)
+                    } else {
+                        self.goPreviousPage?(self.currentYear!, self.currentMonth! - 1)
+                    }
+                } else if indexPath.row > collectionView.endIndex {
+                    if currentMonth == 12 {
+                        self.goNextPage?(self.currentYear! + 1, 1)
+                    } else {
+                        self.goNextPage?(self.currentYear!, self.currentMonth! + 1)
+                    }
+                }
+            }
         }
         
         collectionView.reloadData()
