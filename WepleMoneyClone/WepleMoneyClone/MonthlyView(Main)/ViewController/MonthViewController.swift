@@ -227,6 +227,7 @@ final class MonthViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(DailyHistoryInfoTableViewCell.self, forCellReuseIdentifier: DailyHistoryInfoTableViewCell.identifier)
+        self.tableView.register(DailyHistoryInfoTableViewEmptyCell.self, forCellReuseIdentifier: DailyHistoryInfoTableViewEmptyCell.identifier)
         
         guard let monthCalendarVC = monthCalendarViewControllers.first else {
             return

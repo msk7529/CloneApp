@@ -43,6 +43,7 @@
 		C268801E25AF6C76007ED34B /* IncomeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268801D25AF6C76007ED34B /* IncomeDAO.swift */; };
 		C268802125AF6FB3007ED34B /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C268802025AF6FB3007ED34B /* InfoModel.swift */; };
 		C29FE14A25C1A5D500C128B7 /* ReceiptDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29FE14925C1A5D500C128B7 /* ReceiptDetailViewController.swift */; };
+		C29FE28025C3FE0900C128B7 /* DailyHistoryInfoTableViewEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29FE27F25C3FE0700C128B7 /* DailyHistoryInfoTableViewEmptyCell.swift */; };
 		C2F9D3DD25A8F9D700F6503D /* AddDealHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */; };
 		C2F9D3E025A90C4C00F6503D /* SingleTon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		C268801D25AF6C76007ED34B /* IncomeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDAO.swift; sourceTree = "<group>"; };
 		C268802025AF6FB3007ED34B /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		C29FE14925C1A5D500C128B7 /* ReceiptDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptDetailViewController.swift; sourceTree = "<group>"; };
+		C29FE27F25C3FE0700C128B7 /* DailyHistoryInfoTableViewEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHistoryInfoTableViewEmptyCell.swift; sourceTree = "<group>"; };
 		C2F9D3DC25A8F9D700F6503D /* AddDealHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDealHistoryViewController.swift; sourceTree = "<group>"; };
 		C2F9D3DF25A90C4C00F6503D /* SingleTon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				C268800C25AF6960007ED34B /* MonthlyView(Main) */,
 				C2687E9525AD7740007ED34B /* DailyHistoryInfoTableView.swift */,
 				C2687E9B25AD78A5007ED34B /* DailyHistoryInfoTableViewCell.swift */,
+				C29FE27F25C3FE0700C128B7 /* DailyHistoryInfoTableViewEmptyCell.swift */,
 				C23DE42825A251EE003E30B7 /* DayCollectionView.swift */,
 				C23DE41B259F8973003E30B7 /* DayCollectionViewCell.swift */,
 				C23DE42B25A2555F003E30B7 /* MonthCalendarCollectionView.swift */,
@@ -331,6 +334,7 @@
 				C268800625AF3411007ED34B /* IncomeCategoryCollectionViewCell.swift in Sources */,
 				C23DE42F25A256FA003E30B7 /* MonthCalendarCollectionViewCell.swift in Sources */,
 				C2687E8C25ACF5A7007ED34B /* ExpenseInfoModel.swift in Sources */,
+				C29FE28025C3FE0900C128B7 /* DailyHistoryInfoTableViewEmptyCell.swift in Sources */,
 				C23DE43525A2F33D003E30B7 /* MonthViewController+UICollectionView.swift in Sources */,
 				C2687E9625AD7740007ED34B /* DailyHistoryInfoTableView.swift in Sources */,
 				C23DE43225A28AF5003E30B7 /* MonthCalendarViewController.swift in Sources */,
